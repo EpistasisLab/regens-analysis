@@ -28,6 +28,19 @@ The Triadsim algorithm has used this method to simulate LD patterns that are alm
 
    *  If you want to simulate non-human genomes, then you will need to find external recombination rate values for all genomic regions that you intend to simulate. This information will need to be formatted as follows:
 
+# Installing REALGenomeSIM 
+
+REALGenomeSIM and its dependencies can be installed with pip as follows: 
+
+```
+pip install git+https://github.com/fastlmm/PySnpTools.git@9d8eed0a
+pip install numpy
+pip install pandas
+pip install matplotlib
+pip install scipy
+pip install scikit-learn
+line to install REALGenomeSIM
+```
 # How to Simulate Whole Genomes without Simulating Phenotypes 
 
 # How to Simulate Precise Genotype Phenotype correlations
