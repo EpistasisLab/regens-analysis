@@ -46,9 +46,9 @@ line to install REALGenomeSIM
 
 The following command uses all_1000_genomes_ACB_processed.bed, all_1000_genomes_ACB_processed.bim, and all_1000_genomes_ACB_processed.fam to simulate 10000 individuals
 
-'''
+```
 python triadsim_main.py --bfile all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate-nbreakpoints 2 --simulate-nsamples 10000 --population_code ACB --human_genome_version hg19
-'''
+```
 
 Each argument does the following:
 * --bfile: the filename prefix for the input (.bed, .bim, .fam) set of Plink files
