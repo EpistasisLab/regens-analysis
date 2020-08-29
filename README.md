@@ -15,14 +15,14 @@ The Triadsim algorithm has used this method to simulate LD patterns that are alm
 </p>
 </details>
 
-details>
+<details>
   <summary>REALGenomeSIM can use any whole genomes as an input dataset. This allows REALGenomeSIM to simulate new individuals from any publically available GWAS dataset, including non-human organisms that do not reproduce sexually. The following figures compare the publically available 1000 genomes project subpopulations to datasets that Triadsim simulated from each subpopulation.</summary>
 <p align="center">
 <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/REALGenomeSIM.png" width=500/>
 </p>
 </details>
 
-details>
+<details>
   <summary>REALGenomeSIM uses the output recombination rate maps from () and converts them to probabilities of drawing each simulated breakpoint at a specific genomic location. Depending on your intent, the following optiona are available:</summary>
    *  If you want to simulate arbitrary datasets of realistic human genomes, then this package includes all samples from the 1000 genomes project that I have filtered down to 500000 SNPs. In summary, I kept every biallelic SNP such that every subpopulation contains at least two instances of the minor allele. Exact thinning methods are here. 
 
