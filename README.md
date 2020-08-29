@@ -8,11 +8,13 @@
 
 The Triadsim algorithm has used this method to simulate LD patterns that are almost indistinguishable from those of the input Dataset. REALGenomeSIM simulates equally realistic data, and it has the following improvements:
 
-1. REALGenomeSIM is approximately 50 times faster than Triadsim.
-
+<details>
+  <summary>1. REALGenomeSIM is approximately 50 times faster than Triadsim.</summary>
 <p align="center">
 <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/REALGenomeSIM.png" width=500/>
 </p>
+</details>
+
 
 2. REALGenomeSIM can use any whole genomes as an input dataset. This allows REALGenomeSIM to simulate new individuals from any publically available GWAS dataset, including non-human organisms that do not reproduce sexually. The following figures compare the publically available 1000 genomes project subpopulations to datasets that Triadsim simulated from each subpopulation. 
 
