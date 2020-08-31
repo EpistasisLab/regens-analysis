@@ -18,13 +18,99 @@ The Triadsim algorithm has used this method to simulate LD patterns that are alm
 <details>
   <summary>REALGenomeSIM can use any whole genomes as an input dataset. This allows REALGenomeSIM to simulate new individuals from any publically available GWAS dataset.
     The following figures compare the publically available 1000 genomes project subpopulations to datasets that REALGenomeSIM simulated from each subpopulation.</summary>
+  
+   <details>
+     <summary>These figures compare TSNE plots of the first 10 principal components for real and simulated 1000 genomes subpopulations.</summary>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_ACB.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_ASW.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_BEB.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_CDX.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_CEU.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_CHB.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_CHS.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_CLM.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_ESN.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_FIN.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_GBR.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_GIH.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_GWD.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_IBS.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_ITU.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_JPT.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_ASW.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_KHV.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_LWK.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_MSL.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_MXL.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_PEL.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_PJL.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_PUR.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_STU.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_TSI.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_YRI.png" width=1000/>
+   </p>
+   </details>
+  
    <details>
      <summary>These figures compare TSNE plots of the first 10 principal components for real and simulated 1000 genomes subpopulations.</summary>
    <p align="center">
    <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/TSNE1_vs_TSNE2_for_1000_genome_African_subpopulations.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/TSNE1_vs_TSNE2_for_1000_genome_European_subpopulations.png" width=1900/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/TSNE1_vs_TSNE2_for_1000_genome_European_subpopulations.png" width=1000/>
    </p>
    <p align="center">
    <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/TSNE1_vs_TSNE2_for_1000_genome_American_subpopulations.png" width=1000/>
