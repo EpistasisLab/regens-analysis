@@ -20,7 +20,7 @@ The Triadsim algorithm has used this method to simulate LD patterns that are alm
     The following figures compare the publically available 1000 genomes project subpopulations to datasets that REALGenomeSIM simulated from each subpopulation.</summary>
   
    <details>
-     <summary>These figures compare TSNE plots of the first 10 principal components for real and simulated 1000 genomes subpopulations.</summary>
+     <summary>These figures compare r values for SNP pairs less than  200 kilobases apart for real and simulated 1000 genomes subpopulations (each curve contains roughly 20 million points).</summary>
    <p align="center">
    <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_ACB.png" width=1000/>
    </p>
