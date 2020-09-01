@@ -103,6 +103,91 @@ The Triadsim algorithm has used this method to simulate LD patterns that are alm
    <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_YRI.png" width=1000/>
    </p>
    </details>
+   
+   <details>
+     <summary>These figures compare profiles of SNP pairs'absolute r values vs distance between every real and simulated 1000 genomes subpopulation for SNP pairs less than  200 kilobases apart.</summary>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparison_ACB.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_ASW.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_BEB.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_CDX.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_CEU.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_CHB.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_CHS.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_CLM.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_ESN.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_FIN.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_GBR.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_GIH.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_GWD.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_IBS.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_ITU.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_JPT.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_ASW.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_KHV.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_LWK.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_MSL.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_MXL.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_PEL.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_PJL.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_PUR.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_STU.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_TSI.png" width=1000/>
+   </p>
+   <p align="center">
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparision_YRI.png" width=1000/>
+   </p>
+   </details>
   
    <details>
      <summary>These figures compare TSNE plots of the first 10 principal components for real and simulated 1000 genomes subpopulations.</summary>
