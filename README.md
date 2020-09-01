@@ -20,87 +20,87 @@ The Triadsim algorithm has used this method to simulate LD patterns that are alm
     The following figures compare the publically available 1000 genomes project subpopulations to datasets that REALGenomeSIM simulated from each subpopulation.</summary>
   
    <details>
-     <summary>These figures compare r values for SNP pairs less than  200 kilobases apart for real and simulated 1000 genomes subpopulations (each curve contains roughly 20 million points).</summary>
+     <summary>These figures compare r values and mafs between every real and simulated 1000 genomes subpopulation for SNP pairs less than  200 kilobases apart.</summary>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_ACB.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_ACB.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_ASW.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_ASW.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_BEB.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_BEB.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_CDX.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_CDX.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_CEU.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_CEU.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_CHB.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_CHB.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_CHS.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_CHS.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_CLM.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_CLM.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_ESN.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_ESN.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_FIN.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_FIN.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_GBR.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_GBR.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_GIH.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_GIH.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_GWD.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_GWD.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_IBS.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_IBS.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_ITU.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_ITU.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_JPT.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_JPT.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_ASW.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_ASW.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_KHV.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_KHV.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_LWK.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_LWK.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_MSL.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_MSL.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_MXL.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_MXL.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_PEL.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_PEL.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_PJL.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_PJL.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_PUR.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_PUR.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_STU.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_STU.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_TSI.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_TSI.png" width=1000/>
    </p>
    <p align="center">
-   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_simulated_r_values_YRI.png" width=1000/>
+   <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_val_maf_comparision_YRI.png" width=1000/>
    </p>
    </details>
   
