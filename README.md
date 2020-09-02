@@ -269,9 +269,9 @@ REALGenomeSIM can also specify that the major allele is associated with an effec
 
 ### Example 1: 
 
-let <img src="https://render.githubusercontent.com/render/math?math=y"> be an individual's phenotype, <img src="https://render.githubusercontent.com/render/math?math=S_i"> be the <img src="https://render.githubusercontent.com/render/math?math=i^{th}"> to influence the value of <img src="https://render.githubusercontent.com/render/math?math=y">, and <img src="https://render.githubusercontent.com/render/math?math=B"> be the bias term. The goal is to simulate the following relationship between genotype and phenotype:
+let <img src="https://render.githubusercontent.com/render/math?math=y"> be an individual's phenotype, <img src="https://render.githubusercontent.com/render/math?math=S_i^m"> be the <img src="https://render.githubusercontent.com/render/math?math=i^{th}"> to influence the value of <img src="https://render.githubusercontent.com/render/math?math=y"> such that the minor allele equals 1, <img src="https://render.githubusercontent.com/render/math?math=S_i^M"> be the <img src="https://render.githubusercontent.com/render/math?math=i^{th}"> to influence the value of <img src="https://render.githubusercontent.com/render/math?math=y"> such that the major allele equals 1, and <img src="https://render.githubusercontent.com/render/math?math=B"> be the bias term. The goal is to simulate the following relationship between genotype and phenotype:
   
-<img src="https://render.githubusercontent.com/render/math?math=y = 0.1S_1 %2B 0.1S_2 %2B 0.1S_3 %2B 0.1S_4 %2B 0.1S_5 %2B 0.1S_6 %2B 0.1S_7 %2B 0.1S_8 %2B 0.1S_9 %2B 0.1S_10 %2B + B + \epsilon">
+<img src="https://render.githubusercontent.com/render/math?math=y = 0.1S_1^m %2B 0.1S_2^m %2B 0.1S_3^m %2B 0.1S_4^m %2B 0.1S_5^m %2B 0.1S_6^M %2B 0.1S_7^M %2B 0.1S_8^M %2B 0.1S_9^M %2B 0.1S_10^M %2B + B + \epsilon">
 
 <img src="https://render.githubusercontent.com/render/math?math=\epsilon ~ N(\mu = 0, \sigma = 0.5*E[y])">
 
@@ -279,21 +279,7 @@ let <img src="https://render.githubusercontent.com/render/math?math=y"> be an in
 
 The following files, formated as follows, must must exist in your working directory (you can name them as you please, which must be specified later.)
 
-REALGenomeSIM_main_betas.txt contains the beta coefficients seperated by newline characters
-```
-0.1
-0.1
-0.1
-0.1
-0.1
-0.1
-0.1
-0.1
-0.1
-0.1
-```
-
-REALGenomeSIM_main_causal_SNP_IDs.txt contains specified SNP_ids from the input bim file all_1000_genomes_ACB_processed.bim seperated by newline characters
+REALGenomeSIM_main_causal_SNP_IDs.txt contains specified SNP IDs from the input bim file all_1000_genomes_ACB_processed.bim seperated by newline characters
 
 ```
 rs113633859
@@ -308,7 +294,22 @@ rs2852253
 rs5801463
 ```
 
-REALGenomeSIM_main_causal_SNP_IDs.txt contains specified SNP_ids from the input bim file all_1000_genomes_ACB_processed.bim seperated by newline characters
+For each SNP ID, REALGenomeSIM_main_betas.txt contains a corresponding beta coefficient.
+
+```
+0.1
+0.1
+0.1
+0.1
+0.1
+0.1
+0.1
+0.1
+0.1
+0.1
+```
+
+For each SNP ID, REALGenomeSIM_main_major_minor_assignments.txt specifies whether the minor allele or the major allele equals 1, and correspondingly, whether homozygous minor or homozygous major equals 2. In REALGenomeSIM_main_major_minor_assignments.txt, values of 0 mean the minor allele equals 1, and values of 1 mean that the major allele equals 1.
 
 ```
 python REALGenomeSIM.py --in all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 2 --simulate_nsamples 10000 --population_code ACB --human_genome_version hg19
