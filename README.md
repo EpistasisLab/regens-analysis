@@ -271,7 +271,7 @@ REALGenomeSIM can also specify that the major allele is associated with an effec
 
 let <img src="https://render.githubusercontent.com/render/math?math=y"> be an individual's phenotype and <img src="https://render.githubusercontent.com/render/math?math=S_i"> be the <img src="https://render.githubusercontent.com/render/math?math=i^{th}"> to influence the value of <img src="https://render.githubusercontent.com/render/math?math=y>. The goal is to simulate the following relationship between genotype and phenotype:
   
-<img src="https://render.githubusercontent.com/render/math?math=y = 0.1S_1 %2B 0.1S_2 \+ 0.1S_3 \+ 0.1S_4 \+ 0.1S_5 \+ 0.1S_6 \+ 0.1S_7 \+ 0.1S_8 \+ 0.1S_9 \+ 0.1S_10 \+ \epsilon, \epsilon ~ N(\mu = 0, \sigma = 0.5*E[y])">
+<img src="https://render.githubusercontent.com/render/math?math=y = 0.1S_1 %2B 0.1S_2 %2B 0.1S_3 %2B 0.1S_4 %2B 0.1S_5 %2B 0.1S_6 %2B 0.1S_7 %2B 0.1S_8 %2B 0.1S_9 %2B 0.1S_10 %2B \epsilon, \epsilon ~ N(\mu = 0, \sigma = 0.5*E[y])">
 
 
 ```
