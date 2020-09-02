@@ -238,13 +238,13 @@ line to install REALGenomeSIM
 The following command uses all_1000_genomes_ACB_processed.bed, all_1000_genomes_ACB_processed.bim, and all_1000_genomes_ACB_processed.fam to simulate 10000 individuals
 
 ```
-python REALGenomeSIM.py --in all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 2 --simulate_nsamples 10000 --population_code ACB --human_genome_version hg19
+python REALGenomeSIM.py --in all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 4 --simulate_nsamples 10000 --population_code ACB --human_genome_version hg19
 ```
 
 Each argument does the following:
 * --in: the filename prefix for the input (.bed, .bim, .fam) set of Plink files
 * --out: the filename prefix for the output (.bed, .bim, .fam) set of Plink files
-* --simulate_nbreakpoints: specifies the number of breakpoints to use for each chromosome. Setting it equal to n means that every chromosome is divided into n+1 chunks. 
+* --simulate_nbreakpoints: specifies the number of breakpoints to use for each chromosome. Setting it equal to n means that every chromosome is divided into n+1 chunks. Note that I used 4 breakpoints, but using fewer would be reasonable and also require less RAM and computation time. With that said, I recommend choosing at least 2 or 3 breakpoints to ensure diversity because some of the chromosomes have a single recombination interval with a roughly 20% chance of being sampled as a breakpoint.   
 * --simulate_nsamples: the number of samples to simulate.
 * --population_code: the 1000 genomes project population code that is closest to the population of the input fileset. In this case, they are the same exact population. 
 * --human_genome_version: either hg19 or hg38, depending on the reference genome to which your input dataset was mapped. All provided 1000 genomes datasets were mapped to hg19. 
@@ -342,9 +342,13 @@ regular
 A full command for REALGenomeSIM to simulate genomic data with correlated phenotypes would be formatted as follows (noting that REALGenomeSIM_main_SNP_phenotype_map.txt is not necessary at this point). 
 
 ```
-python REALGenomeSIM_main.py --bfile all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate-nbreakpoints 4 --simulate-nsamples 10000 --phenotype binary --mean_phenotype 0.5 --population_code ACB --human_genome_version hg19 --noise 0.5 --causal_SNP_IDs_path REALGenomeSIM_main_causal_SNP_IDs.txt --major_minor_assignments_path REALGenomeSIM_main_major_minor_assignments.txt --betas_path REALGenomeSIM_main_betas.txt
+python REALGenomeSIM_main.py --bfile all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate-nbreakpoints 4 --simulate-nsamples 10000 --phenotype continuous --mean_phenotype 5.75 --population_code ACB --human_genome_version hg19 --noise 0.5 --causal_SNP_IDs_path REALGenomeSIM_main_causal_SNP_IDs.txt --major_minor_assignments_path REALGenomeSIM_main_major_minor_assignments.txt --betas_path REALGenomeSIM_main_betas.txt
 ```
 
 Each argument that wasn't previously explained does the following:
-* --noise a percentage of <img src="https://render.githubusercontent.com/render/math?math=E[y]"> that <img src="https://render.githubusercontent.com/render/math?math=\sigma_{\epsilon}"> is equal to. In the first model equation, <img src="https://render.githubusercontent.com/render/math?math=\sigma_{\epsilon} = 0.5*5.75 = 2.875">.
-*
+* --phenotype: can be either continuous (for linear regression) or binary (for logistic regression)
+* --mean_phenotype: the desired value of <img src="https://render.githubusercontent.com/render/math?math=E[y]">. REALGenomeSIM modified <img src="https://render.githubusercontent.com/render/math?math=B"> so that <img src="https://render.githubusercontent.com/render/math?math=E[y] = 5.75">. If the phenotype is binary, then <img src="https://render.githubusercontent.com/render/math?math=E[y]"> is the proportion of cases and is thusly constrained to reside in the interval <img src="https://render.githubusercontent.com/render/math?math=0 < E[y] < 1\]">. I would recommend setting <img src="https://render.githubusercontent.com/render/math?math=0.05 < E[y] < 0.95">, particularly since most real GWAS datasets have at least 5% of the less frequent binary status. 
+* --noise: a percentage of <img src="https://render.githubusercontent.com/render/math?math=E[y]"> that <img src="https://render.githubusercontent.com/render/math?math=\sigma_{\epsilon}"> is equal to. In the first model equation, <img src="https://render.githubusercontent.com/render/math?math=\sigma_{\epsilon} = 0.5*5.75 = 2.875">.
+* --causal_SNP_IDs_path: the name of the file formatted as REALGenomeSIM_main_causal_SNP_IDs.txt or the full path if its not in the working directory
+* --betas_path: the name of the file formatted as REALGenomeSIM_main_betas.txt or the full path if its not in the working directory
+* --major_minor_assignments_path: the name of the file formatted as REALGenomeSIM_main_major_minor_assignments.txt or the full path if its not in the working directory
