@@ -253,13 +253,20 @@ Each argument does the following:
 
 REALGenomeSIM can simulate correlations between a binary or continuous phenotype and any linear combination of products of f(SNPs), where f is one of five possible functions that transform the original SNP values in biologically plausible ways:
 
-* regular = f:{0, 1, 2} -> {0, 1, 2}. All SNP values stay the same
-* recessive = f:{0, 1, 2} -> {0, 0, 2}. All 1 values become 0, so only homozygous minor allele genotypes have an effect
-* dominant = f:{0, 1, 2} -> {0, 2, 2}. All 1 values become 2, so both homozygous minor allele genotypes and heterozygous genotypes have equivalent effects
-* heterozygous_only = f:{0, 1, 2} -> {0, 2, 0}. All original 2 values become 0, and then all 1 values become 2. Only heterozygous allele genotypes have an effect
-* heterozygous_only = f:{0, 1, 2} -> {2, 0, 2}. All original 0 values become 2, and then all 1 values become 0. Only homozygous allele genotypes have an effect
+* (regular, minor) = f:{0, 1, 2} -> {0, 1, 2}. All SNP values stay the same
+* (recessive, minor) = f:{0, 1, 2} -> {0, 0, 2}. All 1 values become 0, so only homozygous minor allele genotypes have an effect
+* (dominant, minor) = f:{0, 1, 2} -> {0, 2, 2}. All 1 values become 2, so both homozygous minor allele genotypes and heterozygous genotypes have equivalent effects
+* (heterozygous_only, minor) = f:{0, 1, 2} -> {0, 2, 0}. All original 2 values become 0, and then all 1 values become 2. Only heterozygous allele genotypes have an effect
+* (homozygous_only, minor) = f:{0, 1, 2} -> {2, 0, 2}. All original 0 values become 2, and then all 1 values become 0. Only homozygous allele genotypes have an effect
 
-On top of these effects, you can also specify that the major allele is associated with an effect instead of the minor allele, which is equivant to setting f:{0, 1, 2} -> {2, 1, 0} prior to using either of the five functions listed above. 
+REALGenomeSIM can also specify that the major allele is associated with an effect instead of the minor allele, which is equivant to setting f_swap:{0, 1, 2} -> {2, 1, 0}. Using this option prior to using either of the five functions listed above results in the following transformations:
+
+* (regular, major) = f:f_swap:{0, 1, 2} -> f:{2, 1, 0} -> {2, 1, 0}.
+* (recessive, major) = f:f_swap:{0, 1, 2} -> f:{2, 1, 0} -> {2, 0, 0}
+* (dominant, major) = f:f_swap:{0, 1, 2} -> f:{2, 1, 0} -> {2, 2, 0}. 
+* (heterozygous_only, major) = f:f_swap:{0, 1, 2} -> f:{2, 1, 0} -> {0, 2, 0}. 
+* (homozygous_only, mahor) = f:f_swap:{0, 1, 2} -> f:{2, 1, 0} -> {2, 0, 2}. 
+<img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
 
 The following command uses all_1000_genomes_ACB_processed.bed, all_1000_genomes_ACB_processed.bim, and all_1000_genomes_ACB_processed.fam to simulate 10000 individuals
 
