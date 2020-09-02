@@ -267,13 +267,13 @@ REALGenomeSIM can also specify that the major allele is associated with an effec
 * (heterozygous_only, major) = <img src="https://render.githubusercontent.com/render/math?math=f \circ f_{swap}:\{0, 1, 2\} \rightarrow f:\{2, 1, 0\} \rightarrow \{0, 2, 0\}">. 
 * (homozygous_only, major) = <img src="https://render.githubusercontent.com/render/math?math=f \circ f_{swap}:\{0, 1, 2\} \rightarrow f:\{2, 1, 0\} \rightarrow \{2, 0, 2\}">.
 
-### Example 1: 
+### Example 1: a simple additive model
 
 let <img src="https://render.githubusercontent.com/render/math?math=y"> be an individual's phenotype, <img src="https://render.githubusercontent.com/render/math?math=S_i^m"> be the <img src="https://render.githubusercontent.com/render/math?math=i^{th}"> to influence the value of <img src="https://render.githubusercontent.com/render/math?math=y"> such that the minor allele equals 1, <img src="https://render.githubusercontent.com/render/math?math=S_i^M"> be the <img src="https://render.githubusercontent.com/render/math?math=i^{th}"> to influence the value of <img src="https://render.githubusercontent.com/render/math?math=y"> such that the major allele equals 1, and <img src="https://render.githubusercontent.com/render/math?math=B"> be the bias term. The goal is to simulate the following relationship between genotype and phenotype:
   
-<img src="https://render.githubusercontent.com/render/math?math=y = 0.1S_1^m %2B 0.1S_2^m %2B 0.1S_3^m %2B 0.1S_4^m %2B 0.1S_5^m %2B 0.1S_6^M %2B 0.1S_7^M %2B 0.1S_8^M %2B 0.1S_9^M %2B 0.1S_10^M %2B + B + \epsilon">
+<img src="https://render.githubusercontent.com/render/math?math=y = 0.1S_1^m %2B 0.1S_2^m %2B 0.1S_3^m %2B 0.1S_4^m %2B 0.1S_5^m %2B 0.1S_6^M %2B 0.1S_7^M %2B 0.1S_8^M %2B 0.1S_9^M %2B 0.1S_10^M %2B B %2B \epsilon">
 
-<img src="https://render.githubusercontent.com/render/math?math=\epsilon ~ N(\mu = 0, \sigma = 0.5*E[y])">
+<img src="https://render.githubusercontent.com/render/math?math=\epsilon ~ N(\mu = 0, \sigma_{\epsilon} = 0.5E[y])">
 
 <img src="https://render.githubusercontent.com/render/math?math=E[y] = 5.75">
 
@@ -309,16 +309,42 @@ For each SNP ID, REALGenomeSIM_main_betas.txt contains a corresponding beta coef
 0.1
 ```
 
-For each SNP ID, REALGenomeSIM_main_major_minor_assignments.txt specifies whether the minor allele or the major allele equals 1, and correspondingly, whether homozygous minor or homozygous major equals 2. In REALGenomeSIM_main_major_minor_assignments.txt, values of 0 mean the minor allele equals 1, and values of 1 mean that the major allele equals 1.
+For each SNP ID, REALGenomeSIM_main_major_minor_assignments.txt specifies whether the minor allele or the major allele equals 1, and correspondingly, whether homozygous minor or homozygous major equals 2. In REALGenomeSIM_main_major_minor_assignments.txt, values of 0 mean the minor allele equals 1, and values of 1 mean that the major allele equals 1. Recall that the first five SNPs should be minor and the last 5 SNPs should be major:
 
 ```
-python REALGenomeSIM.py --in all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 2 --simulate_nsamples 10000 --population_code ACB --human_genome_version hg19
+0
+0
+0
+0
+0
+1
+1
+1
+1
+1
 ```
 
-Each argument does the following:
-* --in: the filename prefix for the input (.bed, .bim, .fam) set of Plink files
-* --out: the filename prefix for the output (.bed, .bim, .fam) set of Plink files
-* --simulate_nbreakpoints: specifies the number of breakpoints to use for each chromosome. Setting it equal to n means that every chromosome is divided into n+1 chunks. 
-* --simulate_nsamples: the number of samples to simulate.
-* --population_code: the 1000 genomes project population code that is closest to the population of the input fileset. In this case, they are the same exact population. 
-* --human_genome_version: either hg19 or hg38, depending on the reference genome to which your input dataset was mapped. All provided 1000 genomes datasets were mapped to hg19. 
+There is a fourth optional document REALGenomeSIM_main_SNP_phenotype_map.txt that specifies whether the SNP's effect is regular, recessive, dominant, heterozygous_only, or homozygous_only. You can ignore this document if you want all of the SNPs to have regular effects (as in the first model equation), but an equivalent REALGenomeSIM_main_SNP_phenotype_map.txt would be formatted as follows:
+
+```
+regular
+regular
+regular
+regular
+regular
+regular
+regular
+regular
+regular
+regular
+```
+
+A full command for REALGenomeSIM to simulate genomic data with correlated phenotypes would be formatted as follows (noting that REALGenomeSIM_main_SNP_phenotype_map.txt is not necessary at this point). 
+
+```
+python REALGenomeSIM_main.py --bfile all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate-nbreakpoints 4 --simulate-nsamples 10000 --phenotype binary --mean_phenotype 0.5 --population_code ACB --human_genome_version hg19 --noise 0.5 --causal_SNP_IDs_path REALGenomeSIM_main_causal_SNP_IDs.txt --major_minor_assignments_path REALGenomeSIM_main_major_minor_assignments.txt --betas_path REALGenomeSIM_main_betas.txt
+```
+
+Each argument that wasn't previously explained does the following:
+* --noise a percentage of <img src="https://render.githubusercontent.com/render/math?math=E[y]"> that <img src="https://render.githubusercontent.com/render/math?math=\sigma_{\epsilon}"> is equal to. In the first model equation, <img src="https://render.githubusercontent.com/render/math?math=\sigma_{\epsilon} = 0.5*5.75 = 2.875">.
+*
