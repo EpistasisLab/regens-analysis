@@ -224,7 +224,7 @@ The Triadsim algorithm has used this method to simulate LD patterns that are alm
 REALGenomeSIM and its dependencies can be installed with pip as follows: 
 
 ```
-pip install git+https://github.com/fastlmm/PySnpTools.git@9d8eed0a
+pip install bed-reader==0.0.3a0
 pip install numpy
 pip install pandas
 pip install matplotlib
