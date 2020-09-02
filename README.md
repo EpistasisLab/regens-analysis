@@ -261,10 +261,10 @@ REALGenomeSIM can simulate correlations between a binary or continuous phenotype
 
 REALGenomeSIM can also specify that the major allele is associated with an effect instead of the minor allele, which is equivant to setting <img src="https://render.githubusercontent.com/render/math?math=f_{swap}:\{0, 1, 2\} \rightarrow \{2, 1, 0\}">. Using this option prior to using either of the five functions listed above results in the following transformations:
 
-* (regular, major) = <img src="https://render.githubusercontent.com/render/math?math=f \circ f_{swap}:\{0, 1, 2/} \rightarrow f:/{2, 1, 0/} \rightarrow /{2, 1, 0/}">.
-* (recessive, major) = <img src="https://render.githubusercontent.com/render/math?math=f \circ f_{swap}:\{0, 1, 2/} \rightarrow f:/{2, 1, 0/} \rightarrow /{2, 0, 0/}">.
-* (dominant, major) = <img src="https://render.githubusercontent.com/render/math?math=f \circ f_{swap}:\{0, 1, 2/} \rightarrow f:/{2, 1, 0/} \rightarrow /{2, 2, 0/}">. 
-* (heterozygous_only, major) = <img src="https://render.githubusercontent.com/render/math?math=f \circ f_{swap}:\{0, 1, 2/} \rightarrow f:/{2, 1, 0/} \rightarrow /{0, 2, 0/}">. 
+* (regular, major) = <img src="https://render.githubusercontent.com/render/math?math=f \circ f_{swap}:\{0, 1, 2\} \rightarrow f:\{2, 1, 0\} \rightarrow \{2, 1, 0\}">.
+* (recessive, major) = <img src="https://render.githubusercontent.com/render/math?math=f \circ f_{swap}:\{0, 1, 2\} \rightarrow f:\{2, 1, 0\} \rightarrow \{2, 0, 0\}">.
+* (dominant, major) = <img src="https://render.githubusercontent.com/render/math?math=f \circ f_{swap}:\{0, 1, 2\} \rightarrow f:\{2, 1, 0\} \rightarrow \{2, 2, 0\}">. 
+* (heterozygous_only, major) = <img src="https://render.githubusercontent.com/render/math?math=f \circ f_{swap}:\{0, 1, 2\} \rightarrow f:\{2, 1, 0\} \rightarrow \{0, 2, 0\}">. 
 * (homozygous_only, major) = <img src="https://render.githubusercontent.com/render/math?math=f \circ f_{swap}:\{0, 1, 2\} \rightarrow f:\{2, 1, 0\} \rightarrow \{2, 0, 2\}">.
 
 The following command uses all_1000_genomes_ACB_processed.bed, all_1000_genomes_ACB_processed.bim, and all_1000_genomes_ACB_processed.fam to simulate 10000 individuals
