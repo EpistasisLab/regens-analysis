@@ -265,7 +265,7 @@ REALGenomeSIM can also specify that the major allele is associated with an effec
 * (recessive, major) = f:f_swap:{0, 1, 2} -> f:{2, 1, 0} -> {2, 0, 0}
 * (dominant, major) = f:f_swap:{0, 1, 2} -> f:{2, 1, 0} -> {2, 2, 0}. 
 * (heterozygous_only, major) = f:f_swap:{0, 1, 2} -> f:{2, 1, 0} -> {0, 2, 0}. 
-* (homozygous_only, mahor) = <img src="https://render.githubusercontent.com/render/math?math=f:f_swap:{0, 1, 2} -> f:{2, 1, 0} -> {2, 0, 2}">. 
+* (homozygous_only, mahor) = <img src="https://render.githubusercontent.com/render/math?math=f:f_{swap}:\{0, 1, 2\} \rightarrow f:\{2, 1, 0\} \rightarrow \{2, 0, 2\}">. 
 <img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
 
 The following command uses all_1000_genomes_ACB_processed.bed, all_1000_genomes_ACB_processed.bim, and all_1000_genomes_ACB_processed.fam to simulate 10000 individuals
