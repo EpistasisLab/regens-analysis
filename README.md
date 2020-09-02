@@ -238,14 +238,14 @@ line to install REALGenomeSIM
 The following command uses all_1000_genomes_ACB_processed.bed, all_1000_genomes_ACB_processed.bim, and all_1000_genomes_ACB_processed.fam to simulate 10000 individuals
 
 ```
-python triadsim_main.py --bfile all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate-nbreakpoints 2 --simulate-nsamples 10000 --population_code ACB --human_genome_version hg19
+python REALGenomeSIM_main.py --in all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 2 --simulate_nsamples 10000 --population_code ACB --human_genome_version hg19
 ```
 
 Each argument does the following:
-* --bfile: the filename prefix for the input (.bed, .bim, .fam) set of Plink files
+* --in: the filename prefix for the input (.bed, .bim, .fam) set of Plink files
 * --out: the filename prefix for the output (.bed, .bim, .fam) set of Plink files
-* --simulate-nbreakpoints: specifies the number of breakpoints to use for each chromosome. Setting it equal to n means that every chromosome is divided into n+1 chunks. 
-* --simulate-nsamples: the number of samples to simulate.
+* --simulate_nbreakpoints: specifies the number of breakpoints to use for each chromosome. Setting it equal to n means that every chromosome is divided into n+1 chunks. 
+* --simulate_nsamples: the number of samples to simulate.
 * --population_code: the 1000 genomes project population code that is closest to the population of the input fileset. In this case, they are the same exact population. 
 * --human_genome_version: either hg19 or hg38, depending on the reference genome to which your input dataset was mapped. All provided 1000 genomes datasets were mapped to hg19. 
 
