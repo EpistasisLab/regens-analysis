@@ -267,7 +267,12 @@ REALGenomeSIM can also specify that the major allele is associated with an effec
 * (heterozygous_only, major) = <img src="https://render.githubusercontent.com/render/math?math=f \circ f_{swap}:\{0, 1, 2\} \rightarrow f:\{2, 1, 0\} \rightarrow \{0, 2, 0\}">. 
 * (homozygous_only, major) = <img src="https://render.githubusercontent.com/render/math?math=f \circ f_{swap}:\{0, 1, 2\} \rightarrow f:\{2, 1, 0\} \rightarrow \{2, 0, 2\}">.
 
-The following command uses all_1000_genomes_ACB_processed.bed, all_1000_genomes_ACB_processed.bim, and all_1000_genomes_ACB_processed.fam to simulate 10000 individuals
+### Example 1: 
+
+let <img src="https://render.githubusercontent.com/render/math?math=y"> be an individual's phenotype and <img src="https://render.githubusercontent.com/render/math?math=S_i"> be the <img src="https://render.githubusercontent.com/render/math?math=i^{th}"> to influence the value of <img src="https://render.githubusercontent.com/render/math?math=y>. The goal is to simulate the following relationship between genotype and phenotype:
+  
+<img src="https://render.githubusercontent.com/render/math?math=y = 0.1*S_1 + 0.1*S_2 + 0.1*S_3 + 0.1*S_4 + 0.1*S_5 + 0.1*S_6 + 0.1*S_7 + 0.1*S_8 + 0.1*S_9 + 0.1*S_10 + \epsilon, \epsilon ~ N(\mu = 0, \sigma = 0.5*E[y])">
+
 
 ```
 python REALGenomeSIM.py --in all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 2 --simulate_nsamples 10000 --population_code ACB --human_genome_version hg19
