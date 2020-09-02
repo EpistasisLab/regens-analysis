@@ -238,7 +238,7 @@ line to install REALGenomeSIM
 The following command uses all_1000_genomes_ACB_processed.bed, all_1000_genomes_ACB_processed.bim, and all_1000_genomes_ACB_processed.fam to simulate 10000 individuals
 
 ```
-python REALGenomeSIM_main.py --in all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 2 --simulate_nsamples 10000 --population_code ACB --human_genome_version hg19
+python REALGenomeSIM.py --in all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 2 --simulate_nsamples 10000 --population_code ACB --human_genome_version hg19
 ```
 
 Each argument does the following:
@@ -250,3 +250,27 @@ Each argument does the following:
 * --human_genome_version: either hg19 or hg38, depending on the reference genome to which your input dataset was mapped. All provided 1000 genomes datasets were mapped to hg19. 
 
 # How to Simulate Precise Genotype Phenotype correlations
+
+REALGenomeSIM can simulate correlations between a binary or continuous phenotype and any linear combination of products of f(SNPs), where f is one of five possible functions that transform the original SNP values in biologically plausible ways:
+
+* regular = f:{0, 1, 2} -> {0, 1, 2}. All SNP values stay the same
+* recessive = f:{0, 1, 2} -> {0, 0, 2}. All 1 values become 0, so only homozygous minor allele genotypes have an effect
+* dominant = f:{0, 1, 2} -> {0, 2, 2}. All 1 values become 2, so both homozygous minor allele genotypes and heterozygous genotypes have equivalent effects
+* heterozygous_only = f:{0, 1, 2} -> {0, 2, 0}. All original 2 values become 0, and then all 1 values become 2. Only heterozygous allele genotypes have an effect
+* heterozygous_only = f:{0, 1, 2} -> {2, 0, 2}. All original 0 values become 2, and then all 1 values become 0. Only homozygous allele genotypes have an effect
+
+On top of these effects, you can also specify that the major allele is associated with an effect instead of the minor allele, which is equivant to setting f:{0, 1, 2} -> {2, 1, 0} prior to using either of the five functions listed above. 
+
+The following command uses all_1000_genomes_ACB_processed.bed, all_1000_genomes_ACB_processed.bim, and all_1000_genomes_ACB_processed.fam to simulate 10000 individuals
+
+```
+python REALGenomeSIM.py --in all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 2 --simulate_nsamples 10000 --population_code ACB --human_genome_version hg19
+```
+
+Each argument does the following:
+* --in: the filename prefix for the input (.bed, .bim, .fam) set of Plink files
+* --out: the filename prefix for the output (.bed, .bim, .fam) set of Plink files
+* --simulate_nbreakpoints: specifies the number of breakpoints to use for each chromosome. Setting it equal to n means that every chromosome is divided into n+1 chunks. 
+* --simulate_nsamples: the number of samples to simulate.
+* --population_code: the 1000 genomes project population code that is closest to the population of the input fileset. In this case, they are the same exact population. 
+* --human_genome_version: either hg19 or hg38, depending on the reference genome to which your input dataset was mapped. All provided 1000 genomes datasets were mapped to hg19. 
