@@ -269,9 +269,9 @@ REALGenomeSIM can also specify that the major allele is associated with an effec
 
 ### Example 1: a simple additive model
 
-let <img src="https://render.githubusercontent.com/render/math?math=y"> be an individual's phenotype, <img src="https://render.githubusercontent.com/render/math?math=S_i^m"> be the <img src="https://render.githubusercontent.com/render/math?math=i^{th}"> to influence the value of <img src="https://render.githubusercontent.com/render/math?math=y"> such that the minor allele equals 1, <img src="https://render.githubusercontent.com/render/math?math=S_i^M"> be the <img src="https://render.githubusercontent.com/render/math?math=i^{th}"> to influence the value of <img src="https://render.githubusercontent.com/render/math?math=y"> such that the major allele equals 1, and <img src="https://render.githubusercontent.com/render/math?math=B"> be the bias term. The goal is to simulate the following relationship between genotype and phenotype:
+let <img src="https://render.githubusercontent.com/render/math?math=y"> be an individual's phenotype, <img src="https://render.githubusercontent.com/render/math?math=S_i^m"> be the <img src="https://render.githubusercontent.com/render/math?math=i^{th}"> to influence the value of <img src="https://render.githubusercontent.com/render/math?math=y"> such that the minor allele equals 1, and <img src="https://render.githubusercontent.com/render/math?math=B"> be the bias term. The goal is to simulate the following relationship between genotype and phenotype:
   
-<img src="https://render.githubusercontent.com/render/math?math=y = 0.1S_1^m %2B 0.1S_2^m %2B 0.1S_3^m %2B 0.1S_4^m %2B 0.1S_5^m %2B 0.1S_6^M %2B 0.1S_7^M %2B 0.1S_8^M %2B 0.1S_9^M %2B 0.1S_10^M %2B B %2B \epsilon">
+<img src="https://render.githubusercontent.com/render/math?math=y = 0.1S_1^m %2B 0.1S_2^m %2B 0.1S_3^m %2B 0.1S_4^m %2B 0.1S_5^m %2B 0.1S_6^m %2B 0.1S_7^m %2B 0.1S_8^m %2B 0.1S_9^m %2B 0.1S_10^m %2B B %2B \epsilon">
 
 <img src="https://render.githubusercontent.com/render/math?math=\epsilon ~ N(\mu = 0, \sigma_{\epsilon} = 0.5E[y])">
 
@@ -309,6 +309,26 @@ For each SNP ID, REALGenomeSIM_main_betas.txt contains a corresponding beta coef
 0.1
 ```
 
+A full command for REALGenomeSIM to simulate genomic data with correlated phenotypes would be formatted as follows (noting that REALGenomeSIM_main_SNP_phenotype_map.txt is not necessary at this point). 
+
+```
+python REALGenomeSIM_main.py --in all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 4 --simulate_nsamples 10000 --phenotype continuous --mean_phenotype 5.75 --population_code ACB --human_genome_version hg19 --noise 0.5 --causal_SNP_IDs_path REALGenomeSIM_main_causal_SNP_IDs.txt  --betas_path REALGenomeSIM_main_betas.txt
+```
+
+Each argument that wasn't previously explained does the following:
+* --phenotype: can be either continuous (for linear regression) or binary (for logistic regression)
+* --mean_phenotype: the desired value of <img src="https://render.githubusercontent.com/render/math?math=E[y]">. REALGenomeSIM modified <img src="https://render.githubusercontent.com/render/math?math=B"> so that <img src="https://render.githubusercontent.com/render/math?math=E[y] = 5.75">. If the phenotype is binary, then <img src="https://render.githubusercontent.com/render/math?math=E[y]"> is the proportion of cases and is thusly constrained to reside in the interval <img src="https://render.githubusercontent.com/render/math?math=0 < E[y] < 1\]">. I would recommend setting <img src="https://render.githubusercontent.com/render/math?math=0.05 < E[y] < 0.95">, particularly since most real GWAS datasets have at least 5% of the less frequent binary status. 
+* --noise: a percentage of <img src="https://render.githubusercontent.com/render/math?math=E[y]"> that <img src="https://render.githubusercontent.com/render/math?math=\sigma_{\epsilon}"> is equal to. In the first model equation, <img src="https://render.githubusercontent.com/render/math?math=\sigma_{\epsilon} = 0.5*5.75 = 2.875">.
+* --causal_SNP_IDs_path: the name of the file formatted as REALGenomeSIM_main_causal_SNP_IDs.txt or the full path if its not in the working directory
+* --betas_path: the name of the file formatted as REALGenomeSIM_main_betas.txt or the full path if its not in the working directory
+* --major_minor_assignments_path: the name of the file formatted as REALGenomeSIM_main_major_minor_assignments.txt or the full path if its not in the working directory
+
+### Example 2: inclusion of nonlinear single-SNP effects
+
+In addition to the notation from the first example, let <img src="https://render.githubusercontent.com/render/math?math=S_i^M = f_{swap}(S_i^m)"> be the <img src="https://render.githubusercontent.com/render/math?math=i^{th}"> to influence the value of <img src="https://render.githubusercontent.com/render/math?math=y"> such that the major allele equals 1. Also recall the definitions for the four nontrivial mapping functions (R, D, He, Ho) defined prior to the first example. The second example will model phenotypes as follows:
+
+<img src="https://render.githubusercontent.com/render/math?math=y = 0.1S_1^m %2B 0.1R(S_2^m) %2B 0.1D(S_3^m) %2B 0.1He(S_4^m) %2B 0.1Ho(S_5^m) %2B 0.1S_6^M %2B 0.1R(S_7^M) %2B 0.1D(S_8^M) %2B 0.1He(S_9^M) %2B 0.1Ho(S_10^M) %2B B %2B \epsilon">
+
 For each SNP ID, REALGenomeSIM_main_major_minor_assignments.txt specifies whether the minor allele or the major allele equals 1, and correspondingly, whether homozygous minor or homozygous major equals 2. In REALGenomeSIM_main_major_minor_assignments.txt, values of 0 mean the minor allele equals 1, and values of 1 mean that the major allele equals 1. Recall that the first five SNPs should be minor and the last 5 SNPs should be major:
 
 ```
@@ -338,17 +358,3 @@ regular
 regular
 regular
 ```
-
-A full command for REALGenomeSIM to simulate genomic data with correlated phenotypes would be formatted as follows (noting that REALGenomeSIM_main_SNP_phenotype_map.txt is not necessary at this point). 
-
-```
-python REALGenomeSIM_main.py --bfile all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate-nbreakpoints 4 --simulate-nsamples 10000 --phenotype continuous --mean_phenotype 5.75 --population_code ACB --human_genome_version hg19 --noise 0.5 --causal_SNP_IDs_path REALGenomeSIM_main_causal_SNP_IDs.txt --major_minor_assignments_path REALGenomeSIM_main_major_minor_assignments.txt --betas_path REALGenomeSIM_main_betas.txt
-```
-
-Each argument that wasn't previously explained does the following:
-* --phenotype: can be either continuous (for linear regression) or binary (for logistic regression)
-* --mean_phenotype: the desired value of <img src="https://render.githubusercontent.com/render/math?math=E[y]">. REALGenomeSIM modified <img src="https://render.githubusercontent.com/render/math?math=B"> so that <img src="https://render.githubusercontent.com/render/math?math=E[y] = 5.75">. If the phenotype is binary, then <img src="https://render.githubusercontent.com/render/math?math=E[y]"> is the proportion of cases and is thusly constrained to reside in the interval <img src="https://render.githubusercontent.com/render/math?math=0 < E[y] < 1\]">. I would recommend setting <img src="https://render.githubusercontent.com/render/math?math=0.05 < E[y] < 0.95">, particularly since most real GWAS datasets have at least 5% of the less frequent binary status. 
-* --noise: a percentage of <img src="https://render.githubusercontent.com/render/math?math=E[y]"> that <img src="https://render.githubusercontent.com/render/math?math=\sigma_{\epsilon}"> is equal to. In the first model equation, <img src="https://render.githubusercontent.com/render/math?math=\sigma_{\epsilon} = 0.5*5.75 = 2.875">.
-* --causal_SNP_IDs_path: the name of the file formatted as REALGenomeSIM_main_causal_SNP_IDs.txt or the full path if its not in the working directory
-* --betas_path: the name of the file formatted as REALGenomeSIM_main_betas.txt or the full path if its not in the working directory
-* --major_minor_assignments_path: the name of the file formatted as REALGenomeSIM_main_major_minor_assignments.txt or the full path if its not in the working directory
