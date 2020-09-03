@@ -369,3 +369,77 @@ python REALGenomeSIM.py --in all_1000_genomes_ACB_processed --out all_1000_genom
 
 * --major_minor_assignments_path: the name of the file formatted as REALGenomeSIM_major_minor_assignments.txt or the full path if its not in the working directory
 * --SNP_phenotype_map_path: the name of the file formatted as REALGenomeSIM_SNP_phenotype_map.txt or the full path if its not in the working directory
+
+### Example 3: inclusion of epistatic effects
+
+REALGenomeSIM models epistasis between an arbitrary number of SNPs as the product of SNP values in an individual. Example three uses the following model:
+
+<img src="https://render.githubusercontent.com/render/math?math=y = 0.1S_1^m %2B 0.1R(S_2^m) %2B 0.1D(S_3^m) %2B 0.1He(S_4^m) %2B 0.1Ho(S_5^m) %2B 0.1S_6^M %2B 0.1R(S_7^M) %2B 0.1D(S_8^M) %2B 0.1He(S_9^M) %2B 0.1Ho(S_10^M) %2B 0.15S_11^mS_12^m %2B 0.2S_13^mS_14^mD(S_15^M) %2B 0.3S_16^m(S_17^M)^2S_2^MD(S_4^m) %2B B %2B \epsilon">
+
+<img src="https://render.githubusercontent.com/render/math?math=\epsilon ~ N(\mu = 0, \sigma_{\epsilon} = 0.5E[y])">
+
+<img src="https://render.githubusercontent.com/render/math?math=E[y] = 5.75">
+
+'''
+rs113633859
+rs6757623
+rs5836360
+rs35542336
+rs34342515
+rs7836990
+rs1111818
+rs7895376
+rs35834549
+rs5801463
+rs11852537	rs10883077
+rs1867634	rs545673871	rs10416530
+rs2066224	rs62240045	rs62240045	rs35542336	rs6757623
+'''
+
+'''
+0
+0
+0
+0
+0
+1
+1
+1
+1
+1
+0	0
+0	0	1
+0	1	1	1	0
+'''
+
+'''
+0.1
+0.1
+0.1
+0.1
+0.1
+0.1
+0.1
+0.1
+0.1
+0.1
+0.15
+0.2
+0.3
+'''
+
+'''
+regular
+dominant
+recessive
+heterozygous_only
+homozygous_only
+regular
+dominant
+recessive
+heterozygous_only
+homozygous_only
+regular	regular
+regular	regular	dominant
+regular	regular	regular	regular	dominant
+'''
