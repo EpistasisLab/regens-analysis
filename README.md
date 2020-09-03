@@ -323,6 +323,28 @@ Each argument that wasn't previously explained does the following:
 * --betas_path: the name of the file formatted as REALGenomeSIM_betas.txt or the full path if its not in the working directory
 * --major_minor_assignments_path: the name of the file formatted as REALGenomeSIM_major_minor_assignments.txt or the full path if its not in the working directory
 
+REALGenomeSIM also generates two files that characterize the simulated relationship between genotypes and phenptypes:
+
+* The distribution of phenotypes (notice that it's normally distributed, which is expected under an additive model by the central limit theorem)
+
+<img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/example1_all_1000_genomes_ACB_simulated_phenotype_profile.png">
+
+* A file containing the <img src="https://render.githubusercontent.com/render/math?math=R^2"> value of the phenotype/genotype correlation and the inferred beta coefficients (which will most likely be close to but not equal to the input beta coefficients).
+```
+measured R^2 of model fit: 0.21840881212783192
+measured beta value of feature1: 0.10375469993274405
+measured beta value of feature2: 0.09158917815769968
+measured beta value of feature3: 0.09621670127541823
+measured beta value of feature4: 0.10099616024893379
+measured beta value of feature5: 0.10595962889622762
+measured beta value of feature6: 0.09990693835458762
+measured beta value of feature7: 0.09343695082947306
+measured beta value of feature8: 0.1028013611752096
+measured beta value of feature9: 0.09132853270999804
+measured beta value of feature10: 0.10450671675638493
+measured beta value of intercept: 4.92101167192938
+```
+
 ### Example 2: inclusion of nonlinear single-SNP effects
 
 In addition to the notation from the first example, let <img src="https://render.githubusercontent.com/render/math?math=S_i^M = f_{swap}(S_i^m)"> be the <img src="https://render.githubusercontent.com/render/math?math=i^{th}"> to influence the value of <img src="https://render.githubusercontent.com/render/math?math=y"> such that the major allele equals 1. Also recall the definitions for the four nontrivial mapping functions (R, D, He, Ho) defined prior to the first example. The second example will model phenotypes as follows:
@@ -369,6 +391,26 @@ python REALGenomeSIM.py --in all_1000_genomes_ACB_processed --out all_1000_genom
 
 * --major_minor_assignments_path: the name of the file formatted as REALGenomeSIM_major_minor_assignments.txt or the full path if its not in the working directory
 * --SNP_phenotype_map_path: the name of the file formatted as REALGenomeSIM_SNP_phenotype_map.txt or the full path if its not in the working directory
+
+Here is the distribution of phenotypes.
+
+<img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/example2_all_1000_genomes_ACB_simulated_phenotype_profile.png">
+
+Here is the file containing the <img src="https://render.githubusercontent.com/render/math?math=R^2"> value of the phenotype/genotype correlation and the inferred beta coefficients.
+```
+measured R^2 of model fit: 0.26062585493232215
+measured beta value of feature1: 0.09532940357383092
+measured beta value of feature2: 0.09838413538443105
+measured beta value of feature3: 0.10356136855704572
+measured beta value of feature4: 0.100622751774058
+measured beta value of feature5: 0.09881877516455176
+measured beta value of feature6: 0.10015672892458262
+measured beta value of feature7: 0.09781134124143136
+measured beta value of feature8: 0.10654323045769121
+measured beta value of feature9: 0.10531031279802351
+measured beta value of feature10: 0.10091331861759821
+measured beta value of intercept: 4.800871008690798
+```
 
 ### Example 3: inclusion of epistatic effects
 
@@ -453,4 +495,27 @@ homozygous_only
 regular	regular
 regular	regular	dominant
 regular	regular	regular	regular	dominant
+```
+
+Here is the distribution of phenotypes (notice that epistatic interactions cause skewing because their effect sizes are asymetric. SNP value multiplication causes most values to equal 0, but a small percentage of them are very large.)
+
+<img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/example3_all_1000_genomes_ACB_simulated_phenotype_profile.png">
+
+Here is the file containing the <img src="https://render.githubusercontent.com/render/math?math=R^2"> value of the phenotype/genotype correlation and the inferred beta coefficients.
+```
+measured R^2 of model fit: 0.7462774511213254
+measured beta value of feature1: 0.09748408274096143
+measured beta value of feature2: 0.1037345030486333
+measured beta value of feature3: 0.10747729400786989
+measured beta value of feature4: 0.10356087444337082
+measured beta value of feature5: 0.08897293145796997
+measured beta value of feature6: 0.114037362198526
+measured beta value of feature7: 0.08469133818043673
+measured beta value of feature8: 0.09587043261083873
+measured beta value of feature9: 0.10945717146197069
+measured beta value of feature10: 0.10210806247400407
+measured beta value of feature11: 0.15534388074372998
+measured beta value of feature12: 0.20040913226285006
+measured beta value of feature13: 0.30116564210405655
+measured beta value of intercept: 3.6428125632607453
 ```
