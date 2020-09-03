@@ -279,7 +279,7 @@ let <img src="https://render.githubusercontent.com/render/math?math=y"> be an in
 
 The following files, formated as follows, must must exist in your working directory (you can name them as you please, which must be specified later.)
 
-REALGenomeSIM_main_causal_SNP_IDs.txt contains specified SNP IDs from the input bim file all_1000_genomes_ACB_processed.bim seperated by newline characters
+REALGenomeSIM_causal_SNP_IDs.txt contains specified SNP IDs from the input bim file all_1000_genomes_ACB_processed.bim seperated by newline characters
 
 ```
 rs113633859
@@ -294,7 +294,7 @@ rs2852253
 rs5801463
 ```
 
-For each SNP ID, REALGenomeSIM_main_betas.txt contains a corresponding beta coefficient.
+For each row containing one or more SNP IDs (examples 1 and 2 only contain one SNP ID per row), REALGenomeSIM_betas.txt contains a corresponding beta coefficient.
 
 ```
 0.1
@@ -309,19 +309,19 @@ For each SNP ID, REALGenomeSIM_main_betas.txt contains a corresponding beta coef
 0.1
 ```
 
-A full command for REALGenomeSIM to simulate genomic data with correlated phenotypes would be formatted as follows (noting that REALGenomeSIM_main_SNP_phenotype_map.txt is not necessary at this point). 
+A full command for REALGenomeSIM to simulate genomic data with correlated phenotypes would be formatted as follows (noting that REALGenomeSIM_SNP_phenotype_map.txt is not necessary at this point). 
 
 ```
-python REALGenomeSIM_main.py --in all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 4 --simulate_nsamples 10000 --phenotype continuous --mean_phenotype 5.75 --population_code ACB --human_genome_version hg19 --noise 0.5 --causal_SNP_IDs_path REALGenomeSIM_main_causal_SNP_IDs.txt  --betas_path REALGenomeSIM_main_betas.txt
+python REALGenomeSIM.py --in all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 4 --simulate_nsamples 10000 --phenotype continuous --mean_phenotype 5.75 --population_code ACB --human_genome_version hg19 --noise 0.5 --causal_SNP_IDs_path REALGenomeSIM_causal_SNP_IDs.txt --betas_path REALGenomeSIM_betas.txt
 ```
 
 Each argument that wasn't previously explained does the following:
 * --phenotype: can be either continuous (for linear regression) or binary (for logistic regression)
 * --mean_phenotype: the desired value of <img src="https://render.githubusercontent.com/render/math?math=E[y]">. REALGenomeSIM modified <img src="https://render.githubusercontent.com/render/math?math=B"> so that <img src="https://render.githubusercontent.com/render/math?math=E[y] = 5.75">. If the phenotype is binary, then <img src="https://render.githubusercontent.com/render/math?math=E[y]"> is the proportion of cases and is thusly constrained to reside in the interval <img src="https://render.githubusercontent.com/render/math?math=0 < E[y] < 1\]">. I would recommend setting <img src="https://render.githubusercontent.com/render/math?math=0.05 < E[y] < 0.95">, particularly since most real GWAS datasets have at least 5% of the less frequent binary status. 
 * --noise: a percentage of <img src="https://render.githubusercontent.com/render/math?math=E[y]"> that <img src="https://render.githubusercontent.com/render/math?math=\sigma_{\epsilon}"> is equal to. In the first model equation, <img src="https://render.githubusercontent.com/render/math?math=\sigma_{\epsilon} = 0.5*5.75 = 2.875">.
-* --causal_SNP_IDs_path: the name of the file formatted as REALGenomeSIM_main_causal_SNP_IDs.txt or the full path if its not in the working directory
-* --betas_path: the name of the file formatted as REALGenomeSIM_main_betas.txt or the full path if its not in the working directory
-* --major_minor_assignments_path: the name of the file formatted as REALGenomeSIM_main_major_minor_assignments.txt or the full path if its not in the working directory
+* --causal_SNP_IDs_path: the name of the file formatted as REALGenomeSIM_causal_SNP_IDs.txt or the full path if its not in the working directory
+* --betas_path: the name of the file formatted as REALGenomeSIM_betas.txt or the full path if its not in the working directory
+* --major_minor_assignments_path: the name of the file formatted as REALGenomeSIM_major_minor_assignments.txt or the full path if its not in the working directory
 
 ### Example 2: inclusion of nonlinear single-SNP effects
 
@@ -329,7 +329,13 @@ In addition to the notation from the first example, let <img src="https://render
 
 <img src="https://render.githubusercontent.com/render/math?math=y = 0.1S_1^m %2B 0.1R(S_2^m) %2B 0.1D(S_3^m) %2B 0.1He(S_4^m) %2B 0.1Ho(S_5^m) %2B 0.1S_6^M %2B 0.1R(S_7^M) %2B 0.1D(S_8^M) %2B 0.1He(S_9^M) %2B 0.1Ho(S_10^M) %2B B %2B \epsilon">
 
-For each SNP ID, REALGenomeSIM_main_major_minor_assignments.txt specifies whether the minor allele or the major allele equals 1, and correspondingly, whether homozygous minor or homozygous major equals 2. In REALGenomeSIM_main_major_minor_assignments.txt, values of 0 mean the minor allele equals 1, and values of 1 mean that the major allele equals 1. Recall that the first five SNPs should be minor and the last 5 SNPs should be major:
+<img src="https://render.githubusercontent.com/render/math?math=\epsilon ~ N(\mu = 0, \sigma_{\epsilon} = 0.5E[y])">
+
+<img src="https://render.githubusercontent.com/render/math?math=E[y] = 5.75">
+
+Specifying these components is optional and requires two additional optional documents, examples of which are named REALGenomeSIM_major_minor_assignments.txt and REALGenomeSIM_SNP_phenotype_map.txt.
+
+For each SNP ID, REALGenomeSIM_major_minor_assignments.txt specifies whether the minor allele or the major allele equals 1, and correspondingly, whether homozygous minor or homozygous major equals 2. In REALGenomeSIM_major_minor_assignments.txt, values of 0 mean the minor allele equals 1, and values of 1 mean that the major allele equals 1. In accordance with the second example model equation, REALGenomeSIM_major_minor_assignments.txt specifies that the first five SNPs have their minor allele equal 1, and the last five SNPs have their major allele equal 1:
 
 ```
 0
@@ -344,17 +350,22 @@ For each SNP ID, REALGenomeSIM_main_major_minor_assignments.txt specifies whethe
 1
 ```
 
-There is a fourth optional document REALGenomeSIM_main_SNP_phenotype_map.txt that specifies whether the SNP's effect is regular, recessive, dominant, heterozygous_only, or homozygous_only. You can ignore this document if you want all of the SNPs to have regular effects (as in the first model equation), but an equivalent REALGenomeSIM_main_SNP_phenotype_map.txt would be formatted as follows:
+For each SNP ID, REALGenomeSIM_SNP_phenotype_map.txt specifies whether the SNP's effect is regular, recessive, dominant, heterozygous_only, or homozygous_only. You can ignore this document if you want all of the SNPs to have regular effects (as in the first model equation), but an equivalent REALGenomeSIM_SNP_phenotype_map.txt would be formatted as follows:
 
 ```
 regular
+dominant
+recessive
+heterozygous_only
+homozygous_only
 regular
-regular
-regular
-regular
-regular
-regular
-regular
-regular
-regular
+dominant
+recessive
+heterozygous_only
+homozygous_only
 ```
+
+python REALGenomeSIM.py --in all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 4 --simulate_nsamples 10000 --phenotype continuous --mean_phenotype 5.75 --population_code ACB --human_genome_version hg19 --noise 0.5 --causal_SNP_IDs_path REALGenomeSIM_causal_SNP_IDs.txt --major_minor_assignments_path REALGenomeSIM_major_minor_assignments.txt --betas_path REALGenomeSIM_betas.txt --SNP_phenotype_map_path REALGenomeSIM_SNP_phenotype_map.txt 
+
+* --major_minor_assignments_path: the name of the file formatted as REALGenomeSIM_major_minor_assignments.txt or the full path if its not in the working directory
+* --SNP_phenotype_map_path: the name of the file formatted as REALGenomeSIM_SNP_phenotype_map.txt or the full path if its not in the working directory
