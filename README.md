@@ -380,7 +380,11 @@ REALGenomeSIM models epistasis between an arbitrary number of SNPs as the produc
 
 <img src="https://render.githubusercontent.com/render/math?math=E[y] = 5.75">
 
-'''
+REALGenomeSIM_causal_SNP_IDs2.txt contains sets of specified SNP IDs from the input bim file all_1000_genomes_ACB_processed.bim, where the sets are seperated by newline characters. Each set (i.e. row) only contained one SNP in examples 1 and two, but rows corresponding to SNP products contain multiple tab seperated SNPs. A couple of other things are worth noticing:
+* The <img src="https://render.githubusercontent.com/render/math?math=(S_17^M)^2"> factor in the last additive term squares the effect of that SNP. This is represented in REALGenomeSIM_causal_SNP_IDs2.txt by including that SNP twice. 
+* <img src="https://render.githubusercontent.com/render/math?math=S_2 = rs6757623"> and <img src="https://render.githubusercontent.com/render/math?math=S_4 = rs35542336"> both appear twice. Also (if you look ahead to REALGenomeSIM_major_minor_assignments.txt), <img src="https://render.githubusercontent.com/render/math?math=rs35542336 = S_2^m"> in the monoallelic effect and <img src="https://render.githubusercontent.com/render/math?math=rs35542336 = S_2^M"> in the epistatic effect, demonstrating how the minor allele might cause a simulated monoallelic effect, while the major allele may participate in a different simulated epistatic effect.
+
+```
 rs113633859
 rs6757623
 rs5836360
@@ -394,25 +398,11 @@ rs5801463
 rs11852537	rs10883077
 rs1867634	rs545673871	rs10416530
 rs2066224	rs62240045	rs62240045	rs35542336	rs6757623
-'''
+```
 
-'''
-0
-0
-0
-0
-0
-1
-1
-1
-1
-1
-0	0
-0	0	1
-0	1	1	1	0
-'''
+For each row containing one or more SNP IDs, REALGenomeSIM_betas2.txt contains a corresponding beta coefficient. (Giving each SNP that participates in a multiplicative interaction its own beta coefficient would be pointless).
 
-'''
+```
 0.1
 0.1
 0.1
@@ -426,9 +416,30 @@ rs2066224	rs62240045	rs62240045	rs35542336	rs6757623
 0.15
 0.2
 0.3
-'''
+```
 
-'''
+As before, both REALGenomeSIM_major_minor_assignments2.txt and REALGenomeSIM_SNP_phenotype_map.txt are both optional. If they are not specified, then all SNPs will have the minor allele equal 1 so that the homozygous minor genotype equals 2, and all SNP_phenotype maps will be regular. 
+
+For each SNP ID, REALGenomeSIM_major_minor_assignments2.txt specifies whether the minor allele or the major allele equals 1, and correspondingly, whether homozygous minor or homozygous major equals 2. CAUTION: In general, if a SNP appears in two different effects, then it may safely have different major/minor assignments in different effects. However, if a SNP appears twice in the same effect, then make sure it has the same major/minor assignment within that effect, or that effect may equal 0 depending on the map functions that are used on the SNP. 
+
+```
+0
+0
+0
+0
+0
+1
+1
+1
+1
+1
+0	0
+0	0	1
+0	1	1	1	0
+```
+For each SNP ID, REALGenomeSIM_SNP_phenotype_map.txt specifies whether the SNP's effect is regular, recessive, dominant, heterozygous_only, or homozygous_only. In context to an epistatic interaction, first the map functions are applied to their respective SNPs, and then the resulting mapped SNP values are multiplied together as specified by REALGenomeSIM_causal_SNP_IDs2.txt
+
+```
 regular
 dominant
 recessive
@@ -442,4 +453,4 @@ homozygous_only
 regular	regular
 regular	regular	dominant
 regular	regular	regular	regular	dominant
-'''
+```
