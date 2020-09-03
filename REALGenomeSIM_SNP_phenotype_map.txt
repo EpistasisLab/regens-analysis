@@ -1,0 +1,10 @@
+regular
+dominant
+recessive
+heterozygous_only
+homozygous_only
+regular
+dominant
+recessive
+heterozygous_only
+homozygous_only
