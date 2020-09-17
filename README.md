@@ -175,7 +175,7 @@ The Triadsim algorithm has used this method to simulate LD patterns that are alm
    </details>
   
    <details>
-     <summary>These figures compare TSNE plots of the first 10 principal components for real and simulated 1000 genomes subpopulations. Principal components were computed from the 1000 genomes population datasets, and the loadings were used to project the simulated individuals onto the PC space. These results demonstrate that REALGenomeSIM replicates the the input data's overall population structure in simulated datasets.</summary>
+     <summary>These figures compare TSNE plots of the first 10 principal components for real and simulated 1000 genomes subpopulations. Principal components were computed from the 1000 genomes population datasets, and the loadings were used to project the simulated individuals onto the PC space. These results demonstrate that REALGenomeSIM replicates the the input data's overall population structure in simulated datasets. Note that CEU samples, despite being considered European by the 1000 Genomes project, are plotted with other Americans because they are from Utah.</summary>
    <p align="center">
    <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/TSNE1_vs_TSNE2_for_1000_genome_African_subpopulations.png" width=1000/>
    </p>
