@@ -90,7 +90,7 @@ The Triadsim algorithm has used this method to simulate LD patterns that are alm
    </details>
    
    <details>
-     <summary>These figures compare profiles of SNP pairs'absolute r values vs distance between every real and simulated 1000 genomes subpopulation for SNP pairs less than  200 kilobases apart.</summary>
+     <summary>These figures compare profiles of SNP pairs'absolute r values vs distance between every real and simulated 1000 genomes subpopulation for SNP pairs less than  200 kilobases apart. SNP pairs were sorted by their distance apart and sorted into 4000 adjacent bins, so each datapoint plots one bin's average absolute r value against its average position. </summary>
    <p align="center">
    <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparison_ACB.png" width=1000/>
    </p>
@@ -175,7 +175,7 @@ The Triadsim algorithm has used this method to simulate LD patterns that are alm
    </details>
   
    <details>
-     <summary>These figures compare TSNE plots of the first 10 principal components for real and simulated 1000 genomes subpopulations.</summary>
+     <summary>These figures compare TSNE plots of the first 10 principal components for real and simulated 1000 genomes subpopulations. Principal components were computed from the 1000 genomes population datasets, and the loadings were used to project the simulated individuals onto the PC space. These results demonstrate that REALGenomeSIM replicates the the input data's overall population structure in simulated datasets.</summary>
    <p align="center">
    <img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/TSNE1_vs_TSNE2_for_1000_genome_African_subpopulations.png" width=1000/>
    </p>
