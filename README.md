@@ -9,7 +9,7 @@
 5. (optional) a newline seperated list of 0s and 1s in the same formation as the rsIDs in (3). If A/a are the major/minor alleles, then 0 specifies that (AA = 0, Aa = 1, and aa = 2), while 1 specifies that (AA = 2, Aa = 1, and aa = 0)
 6. (optional) a newline seperated list of genotype value transformation functions in the same formation as the rsIDs in (3).
 
-Standard output includes a standard (bed, bim, fam) plink fileset with the simulated GWAS data, a distribution
+Standard output includes a standard (bed, bim, fam) plink fileset with the simulated genotype data (and optionally phenotype data). There is no option to produce different output. We direct anyone who'd rather not use plink to [bed-reader](https://pypi.org/project/bed-reader/0.1.1/), which reads (bed, bim, fam) plink filesets into the python environment quickly and efficiently. 
 
 REALGenomeSIM is designed to simulate individuals with an LD pattern that is nearly identical to the input population. Any input dataset can be used, but it should ideally contain a minimum of 80 unrelated individuals either from or closely related to the dataset of interest. We use 500000 SNPs filtered from the 1000 genomes dataset as an example. 
   
