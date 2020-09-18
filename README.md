@@ -5,8 +5,9 @@
 1. real genotype data formatted as a standard (bed, bim, fam) plink fileset.
 2. a folder with one dataframe per chromosome containing genomic position intervals and recombination rates [formatted as such](https://raw.githubusercontent.com/EpistasisLab/REALGenomeSIM/master/hg19/ACB/ACB_recombination_map_hapmap_format_hg19_chr_1.txt?token=AKJ677MJLXQBVU243VENRWS7NY4XC)
 3. (optional) a newline seperated list of rsID sets, where rsIDs within a set are tab seperated and occupy one row.  
-4. (optional) a newline seperated list of real numbers (beta coefficients). The ith row's beta coefficient corresponds to the product of SNP values in the ith row of (3). 
+4. (optional) a newline seperated list of real numbers (beta coefficients). Each row has one beta coefficient that corresponds to the product of genotype values in the same row of (3). 
 5. (optional) a newline seperated list of 0s and 1s in the same formation as the rsIDs in (3). If A/a are the major/minor alleles, then 0 specifies that (AA = 0, Aa = 1, and aa = 2), while 1 specifies that (AA = 2, Aa = 1, and aa = 0)
+6. (optional) a newline seperated list of genotype value transformation functions in the same formation as the rsIDs in (3).
 
 Standard output includes a standard (bed, bim, fam) plink fileset with the simulated GWAS data, a distribution
 
