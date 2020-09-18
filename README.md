@@ -2,10 +2,12 @@
 
 **REALGenomeSIM** simulates GWAS data with **R**ealistic **E**pistatic effects, **A**dditive effects, and **L**D patterns with **Genome** **S**ubsampling and **I**ntegrated **M**odeling. It requires the following input:
 
-1. real genotype data formatted as a standard (bed, bim, fam) plink fileset (we recommend at least 50 unrelated samples).
+1. real genotype data formatted as a standard (bed, bim, fam) plink fileset.
 2. a folder with one dataframe per chromosome containing genomic position intervals and recombination rates [formatted as such](https://raw.githubusercontent.com/EpistasisLab/REALGenomeSIM/master/hg19/ACB/ACB_recombination_map_hapmap_format_hg19_chr_1.txt?token=AKJ677MJLXQBVU243VENRWS7NY4XC)
+
+REALGenomeSIM is designed to simulate individuals with an LD pattern that is nearly identical to the input population. Any input dataset can be used, but it should ideally contain a minimum of 80 unrelated individuals either from or closely related to the dataset of interest. We use 500000 SNPs filtered from the 1000 genomes dataset as an example. 
   
-We use a set of 500,000 filtered SNPs from [the 1000 genomes project](https://www.cog-genomics.org/plink/2.0/resources) as an example input, but you can use any available . REALGenomeSIM also requires 
+We provide the second input for all twenty-six 1000 genomes populations, [which was created by the pyrho algorithm](https://github.com/popgenmethods/pyrho). REALGenomeSIM only requires that you select the population that matches most closely to your dataset `--population_code`and the human genome assembly version `--human_genome_version`. [Figure 2B in the pyrho paper](https://advances.sciencemag.org/content/advances/5/10/eaaw9206.full.pdf) shows that populations' recombination rates within a superpopulation (i.e. british and italian) have pearson correlation coefficients of roughly 0.9, which means that it should be fine to using a pyrho recombination rate dataframe for a slightly different population then that of your input dataset.  
 
 **WARNING: REALGenomeSIM's simulated genomes are comprised entirely of concatenated segments from the input dataset's real genomes. If your input genomes are not available for public use, then you may not be allowed to publically release the simulated dataset. You will need to consult the institution that provides you access to your input genotype dataset for more information about this matter.**
 
