@@ -7,13 +7,13 @@
 3. (optional) a newline seperated list of rsID sets, where rsIDs within a set are tab seperated and occupy one row.  
 4. (optional) a newline seperated list of real numbers (beta coefficients). Each row has one beta coefficient that corresponds to the product of genotype values in the same row of (3). 
 5. (optional) a newline seperated list of 0s and 1s in the same formation as the rsIDs in (3). If A/a are the major/minor alleles, then 0 specifies that (AA = 0, Aa = 1, and aa = 2), while 1 specifies that (AA = 2, Aa = 1, and aa = 0)
-6. (optional) a newline seperated list of genotype value transformation functions in the same formation as the rsIDs in (3).
+6. (optional) a newline seperated list of genotype value transformation functions (i.e. is the effect dominant or recessive) in the same formation as the rsIDs in (3).
 
 Standard output includes a standard (bed, bim, fam) plink fileset with the simulated genotype data (and optionally phenotype data). There is no option to produce different output. We direct anyone who'd rather not use plink to [bed-reader](https://pypi.org/project/bed-reader/0.1.1/), which reads (bed, bim, fam) plink filesets into the python environment quickly and efficiently. 
 
 REALGenomeSIM is designed to simulate individuals with an LD pattern that is nearly identical to the input population. Any input dataset can be used, but it should ideally contain a minimum of 80 unrelated individuals either from or closely related to the dataset of interest. We use 500000 SNPs filtered from the 1000 genomes dataset as an example. 
   
-We provide the second input for all twenty-six 1000 genomes populations, [which was created by the pyrho algorithm](https://github.com/popgenmethods/pyrho). REALGenomeSIM only requires that you select the population that matches most closely to your dataset `--population_code`and the human genome assembly version `--human_genome_version`. [Figure 2B in the pyrho paper](https://advances.sciencemag.org/content/advances/5/10/eaaw9206.full.pdf) shows that populations' recombination rates within a superpopulation (i.e. british and italian) have pearson correlation coefficients of roughly 0.9, which means that it should be fine to using a pyrho recombination rate dataframe for a slightly different population then that of your input dataset.  
+We provide the second input for all twenty-six 1000 genomes populations, [which was created by the pyrho algorithm](https://github.com/popgenmethods/pyrho). REALGenomeSIM can select the population that matches most closely to the input dataset with the`--population_code` argument. [Figure 2B in the pyrho paper](https://advances.sciencemag.org/content/advances/5/10/eaaw9206.full.pdf) shows that closely related populations' recombination rates have high pearson correlation coefficients (roughly 0.9), so using a pyrho recombination rate dataframe for a slightly different population's genotype dataset should be fine.  
 
 # IMPORTANT NOTICE (PLEASE READ)
 
