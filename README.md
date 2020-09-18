@@ -2,8 +2,8 @@
 
 **REALGenomeSIM** simulates GWAS data with **R**ealistic **E**pistatic effects, **A**dditive effects, and **L**D patterns with **Genome** **S**ubsampling and **I**ntegrated **M**odeling. It requires the following input:
 
-1. real genotype data as input in the form of a standard (bed, bim, fam) plink fileset.
-2. df 
+1. real genotype data formatted as a standard (bed, bim, fam) plink fileset (we recommend at least 50 unrelated samples).
+2. a folder with one dataframe per chromosome containing genomic position intervals and recombination rates [formatted as such](https://raw.githubusercontent.com/EpistasisLab/REALGenomeSIM/master/hg19/ACB/ACB_recombination_map_hapmap_format_hg19_chr_1.txt?token=AKJ677MJLXQBVU243VENRWS7NY4XC)
   
 We use a set of 500,000 filtered SNPs from [the 1000 genomes project](https://www.cog-genomics.org/plink/2.0/resources) as an example input, but you can use any available . REALGenomeSIM also requires 
 
