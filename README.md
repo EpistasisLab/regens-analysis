@@ -65,9 +65,13 @@ Each argument does the following:
 
 # How to Simulate Precise Genotype Phenotype correlations
 
-REALGenomeSIM can simulate correlations between a binary or continuous phenotype and any linear combination of products of f(SNPs), where f is one of five possible functions that transform the original SNP values in biologically plausible ways:
+Given at least one set of one or more SNPs, REALGenomeSIM can simulate a correlation between each set of SNPs and a binary or continuous phenotype in the following way:
 
-<img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparison_GBR.png" width=1000/>
+1. Normally, if A is the major allele and a is the minor allele, then (AA = 0, Aa = 1, and aa = 2). However, you can transform the Genotype values so that (AA = 2, Aa = 1, and aa = 0). We refer to this operation as <img src="https://render.githubusercontent.com/render/math?math=f_swap">.
+
+2. After step 1, you can further transform the values so that they reflect no effect (I), a dominance effect (D), a recessive effect (R), a hetterozygous only effect (He), or a homozygous only effect (Ho). The table below shows how each combination of one step 1 function (columns) and one step 2 function (rows) transforms the original (AA = 0, Aa = 1, and aa = 2) values.
+
+<img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/function_table.png" width=1000/>
 
 ### Example 1: a simple additive model
 
