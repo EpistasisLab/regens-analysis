@@ -71,7 +71,7 @@ Given at least one set of one or more SNPs, REALGenomeSIM can simulate a correla
 
 2. After step 1, you can further transform the values so that they reflect no effect (I), a dominance effect (D), a recessive effect (R), a hetterozygous only effect (He), or a homozygous only effect (Ho). The table below shows how each combination of one step 1 function (columns) and one step 2 function (rows) transforms the original (AA = 0, Aa = 1, and aa = 2) values.
 
-<img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/function_table.png" width=1000/>
+<img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/function_table.png" width=100/>
 
 ### Example 1: a simple additive model
 
