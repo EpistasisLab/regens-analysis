@@ -47,21 +47,13 @@ After installing everything above, download the REALGenomeSIM github page and ch
 
 # How to Simulate Whole Genomes without Simulating Phenotypes 
 
-The following command uses all_1000_genomes_ACB_processed.bed, all_1000_genomes_ACB_processed.bim, and all_1000_genomes_ACB_processed.fam to simulate 10000 individuals
+The following command uses ACB.bed, ACB.bim, and ACB.fam to simulate 10000 individuals.
 
 ```
 python REALGenomeSIM.py --in all_1000_genomes_ACB_processed \
 --out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 4 \
 --simulate_nsamples 10000 --population_code ACB --human_genome_version hg19
 ```
-
-Each argument does the following:
-* --in: the filename prefix for the input (.bed, .bim, .fam) set of Plink files
-* --out: the filename prefix for the output (.bed, .bim, .fam) set of Plink files
-* --simulate_nbreakpoints: specifies the number of breakpoints to use for each chromosome. Setting it equal to n means that every chromosome is divided into n+1 chunks. Note that I used 4 breakpoints, but using fewer would be reasonable and also require less RAM and computation time. With that said, I recommend choosing at least 2 or 3 breakpoints to ensure diversity because some of the chromosomes have a single recombination interval with a roughly 20% chance of being sampled as a breakpoint.   
-* --simulate_nsamples: the number of samples to simulate.
-* --population_code: the 1000 genomes project population code that is closest to the population of the input fileset. In this case, they are the same exact population. 
-* --human_genome_version: either hg19 or hg38, depending on the reference genome to which your input dataset was mapped. All provided 1000 genomes datasets were mapped to hg19. 
 
 # How to Simulate Precise Genotype Phenotype correlations
 
@@ -77,7 +69,15 @@ Given at least one set of one or more SNPs, REALGenomeSIM can simulate a correla
 
 ### Example 1: a simple additive model
 
-let <img src="https://render.githubusercontent.com/render/math?math=y"> be an individual's phenotype, <img src="https://render.githubusercontent.com/render/math?math=S_i^m"> be the <img src="https://render.githubusercontent.com/render/math?math=i^{th}"> to influence the value of <img src="https://render.githubusercontent.com/render/math?math=y"> such that the minor allele equals 1, and <img src="https://render.githubusercontent.com/render/math?math=B"> be the bias term. The goal is to simulate the following relationship between genotype and phenotype:
+A full command for REALGenomeSIM to simulate genomic data with correlated phenotypes would be formatted as follows (noting that SNP_phenotype_map.txt is not necessary at this point). 
+
+```
+python REALGenomeSIM.py --in ACB --out ACB_simulated --simulate_nbreakpoints 4 \
+--simulate_nsamples 10000 --phenotype continuous --mean_phenotype 5.75 --population_code ACB \
+--human_genome_version hg19 --noise 0.5 --causal_SNP_IDs_path causal_SNP_IDs.txt --betas_path betas.txt
+```
+
+This command simulates genotype-phenotype correlations according to the following model. let <img src="https://render.githubusercontent.com/render/math?math=y"> be an individual's phenotype, <img src="https://render.githubusercontent.com/render/math?math=s_i"> be the <img src="https://render.githubusercontent.com/render/math?math=i^{th}"> to influence the value of <img src="https://render.githubusercontent.com/render/math?math=y"> such that (AA = 0, Aa = 1, and aa = 2), and <img src="https://render.githubusercontent.com/render/math?math=B"> be the bias term. The goal is to simulate the following relationship between genotype and phenotype:
   
 <img src="https://render.githubusercontent.com/render/math?math=y = 0.2s_1 %2B 0.2s_2 %2B 0.2s_3 %2B B %2B \epsilon">
 
@@ -85,7 +85,7 @@ let <img src="https://render.githubusercontent.com/render/math?math=y"> be an in
 
 <img src="https://render.githubusercontent.com/render/math?math=E[y] = 5.75">
 
-The following files, formated as follows, must must exist in your working directory (you can name them as you please, which must be specified later.)
+The following files, formatted as displayed below, must must exist in your working directory. They can have any name, but their names must be input into the correct command line arguments.
 
 causal_SNP_IDs.txt contains specified SNP IDs from the input bim file ACB.bim seperated by newline characters
 
@@ -95,198 +95,112 @@ rs6757623
 rs5836360
 ```
 
-For each row containing one or more SNP IDs (examples 1 and 2 only contain one SNP ID per row), betas.txt contains a corresponding beta coefficient.
+betas.txt contains one (real numbered) beta coefficient for each row in causal_SNP_IDs.txt
 
 ```
 0.2
 0.2
 0.2
-```
-
-A full command for REALGenomeSIM to simulate genomic data with correlated phenotypes would be formatted as follows (noting that SNP_phenotype_map.txt is not necessary at this point). 
-
-```
-python REALGenomeSIM.py --in ACB --out ACB_simulated --simulate_nbreakpoints 4 \
---simulate_nsamples 10000 --phenotype continuous --mean_phenotype 5.75 --population_code ACB \
---human_genome_version hg19 --noise 0.5 --causal_SNP_IDs_path causal_SNP_IDs.txt --betas_path betas.txt
 ```
 
 REALGenomeSIM also generates [a distribution of phenotypes](https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/example1_all_1000_genomes_ACB_simulated_phenotype_profile.png) and a file containing the <img src="https://render.githubusercontent.com/render/math?math=R^2"> value of the phenotype/genotype correlation and the [*inferred* beta coefficients](https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/example1_all_1000_genomes_ACB_simulated_phenotype_profile.png) (which will most likely be close to but not equal to the input beta coefficients).
 
 ### Example 2: inclusion of nonlinear single-SNP effects
 
-In addition to the notation from the first example, let <img src="https://render.githubusercontent.com/render/math?math=S_i^M = f_{swap}(S_i^m)"> be the <img src="https://render.githubusercontent.com/render/math?math=i^{th}"> to influence the value of <img src="https://render.githubusercontent.com/render/math?math=y"> such that the major allele equals 1. Also recall the definitions for the four nontrivial mapping functions (R, D, He, Ho) defined prior to the first example. The second example will model phenotypes as follows:
-
-<img src="https://render.githubusercontent.com/render/math?math=y = 0.1S_1^m %2B 0.1R(S_2^m) %2B 0.1D(S_3^m) %2B 0.1He(S_4^m) %2B 0.1Ho(S_5^m) %2B 0.1S_6^M %2B 0.1R(S_7^M) %2B 0.1D(S_8^M) %2B 0.1He(S_9^M) %2B 0.1Ho(S_10^M) %2B B %2B \epsilon">
-
-<img src="https://render.githubusercontent.com/render/math?math=\epsilon ~ N(\mu = 0, \sigma_{\epsilon} = 0.5E[y])">
-
-<img src="https://render.githubusercontent.com/render/math?math=E[y] = 5.75">
-
-Specifying these components is optional and requires two additional optional documents, examples of which are named REALGenomeSIM_major_minor_assignments.txt and REALGenomeSIM_SNP_phenotype_map.txt.
-
-For each SNP ID, REALGenomeSIM_major_minor_assignments.txt specifies whether the minor allele or the major allele equals 1, and correspondingly, whether homozygous minor or homozygous major equals 2. In REALGenomeSIM_major_minor_assignments.txt, values of 0 mean the minor allele equals 1, and values of 1 mean that the major allele equals 1. In accordance with the second example model equation, REALGenomeSIM_major_minor_assignments.txt specifies that the first five SNPs have their minor allele equal 1, and the last five SNPs have their major allele equal 1:
+Here is the command to simulate this dataset:
 
 ```
-0
-0
-0
-0
-0
-1
-1
-1
-1
-1
+python REALGenomeSIM.py --in ACB --out ACB_simulated --simulate_nbreakpoints 4 --simulate_nsamples 10000 \
+--phenotype continuous --mean_phenotype 5.75 --population_code ACB --human_genome_version hg19 --noise 0.5 \
+--causal_SNP_IDs_path causal_SNP_IDs.txt --major_minor_assignments_path major_minor_assignments.txt \
+--betas_path REALGenomeSIM_betas.txt --SNP_phenotype_map_path REALGenomeSIM_SNP_phenotype_map.txt 
 ```
-
-For each SNP ID, REALGenomeSIM_SNP_phenotype_map.txt specifies whether the SNP's effect is regular, recessive, dominant, heterozygous_only, or homozygous_only. You can ignore this document if you want all of the SNPs to have regular effects (as in the first model equation), but an equivalent REALGenomeSIM_SNP_phenotype_map.txt would be formatted as follows:
-
-```
-regular
-dominant
-recessive
-heterozygous_only
-homozygous_only
-regular
-dominant
-recessive
-heterozygous_only
-homozygous_only
-```
-
-python REALGenomeSIM.py --in all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 4 --simulate_nsamples 10000 --phenotype continuous --mean_phenotype 5.75 --population_code ACB --human_genome_version hg19 --noise 0.5 --causal_SNP_IDs_path REALGenomeSIM_causal_SNP_IDs.txt --major_minor_assignments_path REALGenomeSIM_major_minor_assignments.txt --betas_path REALGenomeSIM_betas.txt --SNP_phenotype_map_path REALGenomeSIM_SNP_phenotype_map.txt 
 
 * --major_minor_assignments_path: the name of the file formatted as REALGenomeSIM_major_minor_assignments.txt or the full path if its not in the working directory
 * --SNP_phenotype_map_path: the name of the file formatted as REALGenomeSIM_SNP_phenotype_map.txt or the full path if its not in the working directory
 
-Here is the distribution of phenotypes.
+In addition to the notation from the first example, let <img src="https://render.githubusercontent.com/render/math?math=S_i^M = f_{swap}(S_i)"> be the <img src="https://render.githubusercontent.com/render/math?math=i^{th}"> genotype to influence the value of <img src="https://render.githubusercontent.com/render/math?math=y"> such that (AA = 2, Aa = 1, and aa = 0). Also recall the definitions for the four nontrivial mapping functions (R, D, He, Ho) defined prior to the first example. The second example will model phenotypes as follows:
 
-<img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/example2_all_1000_genomes_ACB_simulated_phenotype_profile.png">
-
-Here is the file containing the <img src="https://render.githubusercontent.com/render/math?math=R^2"> value of the phenotype/genotype correlation and the inferred beta coefficients.
-```
-measured R^2 of model fit: 0.26062585493232215
-measured beta value of feature1: 0.09532940357383092
-measured beta value of feature2: 0.09838413538443105
-measured beta value of feature3: 0.10356136855704572
-measured beta value of feature4: 0.100622751774058
-measured beta value of feature5: 0.09881877516455176
-measured beta value of feature6: 0.10015672892458262
-measured beta value of feature7: 0.09781134124143136
-measured beta value of feature8: 0.10654323045769121
-measured beta value of feature9: 0.10531031279802351
-measured beta value of feature10: 0.10091331861759821
-measured beta value of intercept: 4.800871008690798
-```
-
-### Example 3: inclusion of epistatic effects
-
-REALGenomeSIM models epistasis between an arbitrary number of SNPs as the product of SNP values in an individual. Example three uses the following model:
-
-<img src="https://render.githubusercontent.com/render/math?math=y = 0.1S_1^m %2B 0.1R(S_2^m) %2B 0.1D(S_3^m) %2B 0.1He(S_4^m) %2B 0.1Ho(S_5^m) %2B 0.1S_6^M %2B 0.1R(S_7^M) %2B 0.1D(S_8^M) %2B 0.1He(S_9^M) %2B 0.1Ho(S_10^M) %2B 0.15S_11^mS_12^m %2B 0.2S_13^mS_14^mD(S_15^M) %2B 0.3S_16^m(S_17^M)^2S_2^MD(S_4^m) %2B B %2B \epsilon">
+<img src="https://render.githubusercontent.com/render/math?math=y = 0.2R(s_2) %2B 0.2D(s_3) %2B 0.2S_6 %2B B %2B \epsilon">
 
 <img src="https://render.githubusercontent.com/render/math?math=\epsilon ~ N(\mu = 0, \sigma_{\epsilon} = 0.5E[y])">
 
 <img src="https://render.githubusercontent.com/render/math?math=E[y] = 5.75">
 
-REALGenomeSIM_causal_SNP_IDs2.txt contains sets of specified SNP IDs from the input bim file all_1000_genomes_ACB_processed.bim, where the sets are seperated by newline characters. Each set (i.e. row) only contained one SNP in examples 1 and two, but rows corresponding to SNP products contain multiple tab seperated SNPs. A couple of other things are worth noticing:
-* The <img src="https://render.githubusercontent.com/render/math?math=(S_17^M)^2"> factor in the last additive term squares the effect of that SNP. This is represented in REALGenomeSIM_causal_SNP_IDs2.txt by including that SNP twice. 
-* <img src="https://render.githubusercontent.com/render/math?math=S_2 = rs6757623"> and <img src="https://render.githubusercontent.com/render/math?math=S_4 = rs35542336"> both appear twice. Also (if you look ahead to REALGenomeSIM_major_minor_assignments.txt), <img src="https://render.githubusercontent.com/render/math?math=rs35542336 = S_2^m"> in the monoallelic effect and <img src="https://render.githubusercontent.com/render/math?math=rs35542336 = S_2^M"> in the epistatic effect, demonstrating how the minor allele might cause a simulated monoallelic effect, while the major allele may participate in a different simulated epistatic effect.
+Specifying that (AA = 2, Aa = 1, and aa = 0) for one or more alleles is optional and requires major_minor_assignments.txt.
 
 ```
-rs113633859
-rs6757623
-rs5836360
-rs35542336
-rs34342515
-rs7836990
-rs1111818
-rs7895376
-rs35834549
-rs5801463
-rs11852537	rs10883077
-rs1867634	rs545673871	rs10416530
-rs2066224	rs62240045	rs62240045	rs35542336	rs6757623
+0
+0
+1
+```
+
+Specifying the first genotype's dominance (AA = 0, Aa = 2, and aa = 2) and second genotype's heterozygosity only (AA = 0, Aa = 2, and aa = 0) is optional and requires SNP_phenotype_map.txt. 
+
+```
+dominant
+heterozygous_only
+regular
+```
+
+Note that R is specified by `recessive` and Ho is specified by `homozygous_only`.
+
+REALGenomeSIM also generates [a distribution of phenotypes](https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/example2_all_1000_genomes_ACB_simulated_phenotype_profile.png) and a file containing the <img src="https://render.githubusercontent.com/render/math?math=R^2"> value of the phenotype/genotype correlation and the [*inferred* beta coefficients](https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/example2_all_1000_genomes_ACB_simulated_phenotype_profile.png) (which will most likely be close to but not equal to the input beta coefficients).
+
+### Example 3: inclusion of epistatic effects
+
+This command simulates dagenotype-phenotype relationships for the model that follows:
+
+```
+python REALGenomeSIM.py --in ACB --out ACB_simulated --simulate_nbreakpoints 4 --simulate_nsamples 10000 \
+--phenotype continuous --mean_phenotype 5.75 --population_code ACB --human_genome_version hg19 --noise 0.5 \
+--causal_SNP_IDs_path causal_SNP_IDs.txt --major_minor_assignments_path major_minor_assignments.txt \
+--betas_path REALGenomeSIM_betas.txt --SNP_phenotype_map_path REALGenomeSIM_SNP_phenotype_map.txt 
+```
+
+REALGenomeSIM models epistasis between an arbitrary number of SNPs as the product of transformed SNP values in an individual.
+
+<img src="https://render.githubusercontent.com/render/math?math=y = 0.2s_1 %2B 0.2s_2R(s_3) %2B 0.2Ho(S_4)s_5s_5 %2B B %2B \epsilon">
+
+<img src="https://render.githubusercontent.com/render/math?math=\epsilon ~ N(\mu = 0, \sigma_{\epsilon} = 0.5E[y])">
+
+<img src="https://render.githubusercontent.com/render/math?math=E[y] = 5.75">
+
+Specifying that multiple SNPs interact (or that rs62240045 has a polynomic effect) requires placing all participating SNPs in the same tab seperated line of causal_SNP_IDs.txt
+
+```
+rs11852537
+rs1867634	rs545673871
+rs2066224	rs62240045	rs62240045
 ```
 
 For each row containing one or more SNP IDs, REALGenomeSIM_betas2.txt contains a corresponding beta coefficient. (Giving each SNP that participates in a multiplicative interaction its own beta coefficient would be pointless).
 
 ```
-0.1
-0.1
-0.1
-0.1
-0.1
-0.1
-0.1
-0.1
-0.1
-0.1
-0.15
 0.2
-0.3
+0.2
+0.2
 ```
+$y = x^2$
 
 As before, both REALGenomeSIM_major_minor_assignments2.txt and REALGenomeSIM_SNP_phenotype_map.txt are both optional. If they are not specified, then all SNPs will have the minor allele equal 1 so that the homozygous minor genotype equals 2, and all SNP_phenotype maps will be regular. 
 
 For each SNP ID, REALGenomeSIM_major_minor_assignments2.txt specifies whether the minor allele or the major allele equals 1, and correspondingly, whether homozygous minor or homozygous major equals 2. CAUTION: In general, if a SNP appears in two different effects, then it may safely have different major/minor assignments in different effects. However, if a SNP appears twice in the same effect, then make sure it has the same major/minor assignment within that effect, or that effect may equal 0 depending on the map functions that are used on the SNP. 
 
 ```
-0
-0
-0
-0
-0
-1
-1
-1
-1
-1
+0	
 0	0
-0	0	1
-0	1	1	1	0
+1	0	0
 ```
 For each SNP ID, REALGenomeSIM_SNP_phenotype_map.txt specifies whether the SNP's effect is regular, recessive, dominant, heterozygous_only, or homozygous_only. In context to an epistatic interaction, first the map functions are applied to their respective SNPs, and then the resulting mapped SNP values are multiplied together as specified by REALGenomeSIM_causal_SNP_IDs2.txt
 
 ```
 regular
-dominant
-recessive
-heterozygous_only
-homozygous_only
-regular
-dominant
-recessive
-heterozygous_only
-homozygous_only
-regular	regular
-regular	regular	dominant
-regular	regular	regular	regular	dominant
+regular	recessive
+homozygous_only regular	regular
 ```
 
-Here is the distribution of phenotypes (notice that epistatic interactions cause skewing because their effect sizes are asymetric. SNP value multiplication causes most values to equal 0, but a small percentage of them are very large.)
-
-<img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/example3_all_1000_genomes_ACB_simulated_phenotype_profile.png">
-
-Here is the file containing the <img src="https://render.githubusercontent.com/render/math?math=R^2"> value of the phenotype/genotype correlation and the inferred beta coefficients.
-```
-measured R^2 of model fit: 0.7462774511213254
-measured beta value of feature1: 0.09748408274096143
-measured beta value of feature2: 0.1037345030486333
-measured beta value of feature3: 0.10747729400786989
-measured beta value of feature4: 0.10356087444337082
-measured beta value of feature5: 0.08897293145796997
-measured beta value of feature6: 0.114037362198526
-measured beta value of feature7: 0.08469133818043673
-measured beta value of feature8: 0.09587043261083873
-measured beta value of feature9: 0.10945717146197069
-measured beta value of feature10: 0.10210806247400407
-measured beta value of feature11: 0.15534388074372998
-measured beta value of feature12: 0.20040913226285006
-measured beta value of feature13: 0.30116564210405655
-measured beta value of intercept: 3.6428125632607453
-```
+REALGenomeSIM also generates [a distribution of phenotypes](https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/example3_all_1000_genomes_ACB_simulated_phenotype_profile.png) and a file containing the <img src="https://render.githubusercontent.com/render/math?math=R^2"> value of the phenotype/genotype correlation and the [*inferred* beta coefficients](https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/example3_all_1000_genomes_ACB_simulated_phenotype_profile.png) (which will most likely be close to but not equal to the input beta coefficients).
 
 # Technical details about REALGenomeSIM
 
