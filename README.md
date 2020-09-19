@@ -50,7 +50,9 @@ After installing everything above, download the REALGenomeSIM github page and ch
 The following command uses all_1000_genomes_ACB_processed.bed, all_1000_genomes_ACB_processed.bim, and all_1000_genomes_ACB_processed.fam to simulate 10000 individuals
 
 ```
-python REALGenomeSIM.py --in all_1000_genomes_ACB_processed --out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 4 --simulate_nsamples 10000 --population_code ACB --human_genome_version hg19
+python REALGenomeSIM.py --in all_1000_genomes_ACB_processed\
+--out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 4\
+--simulate_nsamples 10000 --population_code ACB --human_genome_version hg19
 ```
 
 Each argument does the following:
