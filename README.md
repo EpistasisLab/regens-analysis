@@ -50,8 +50,8 @@ After installing everything above, download the REALGenomeSIM github page and ch
 The following command uses all_1000_genomes_ACB_processed.bed, all_1000_genomes_ACB_processed.bim, and all_1000_genomes_ACB_processed.fam to simulate 10000 individuals
 
 ```
-python REALGenomeSIM.py --in all_1000_genomes_ACB_processed\
---out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 4\
+python REALGenomeSIM.py --in all_1000_genomes_ACB_processed \
+--out all_1000_genomes_ACB_simulated --simulate_nbreakpoints 4 \
 --simulate_nsamples 10000 --population_code ACB --human_genome_version hg19
 ```
 
@@ -67,19 +67,7 @@ Each argument does the following:
 
 REALGenomeSIM can simulate correlations between a binary or continuous phenotype and any linear combination of products of f(SNPs), where f is one of five possible functions that transform the original SNP values in biologically plausible ways:
 
-* (regular, minor) = <img src="https://render.githubusercontent.com/render/math?math=I:\{0, 1, 2\} \rightarrow \{0, 1, 2\}">. All SNP values stay the same
-* (recessive, minor) = <img src="https://render.githubusercontent.com/render/math?math=R:\{0, 1, 2\} \rightarrow \{0, 0, 2\}">. All 1 values become 0, so only homozygous minor allele genotypes have an effect
-* (dominant, minor) = <img src="https://render.githubusercontent.com/render/math?math=D:\{0, 1, 2\} \rightarrow \{0, 2, 2\}">. All 1 values become 2, so both homozygous minor allele genotypes and heterozygous genotypes have equivalent effects
-* (heterozygous_only, minor) = <img src="https://render.githubusercontent.com/render/math?math=He:\{0, 1, 2\} \rightarrow \{0, 2, 0\}">. All original 2 values become 0, and then all 1 values become 2. Only heterozygous allele genotypes have an effect
-* (homozygous_only, minor) = <img src="https://render.githubusercontent.com/render/math?math=Ho:\{0, 1, 2\} \rightarrow \{2, 0, 2\}">. All original 0 values become 2, and then all 1 values become 0. Only homozygous allele genotypes have an effect
-
-REALGenomeSIM can also specify that the major allele is associated with an effect instead of the minor allele, which is equivant to setting <img src="https://render.githubusercontent.com/render/math?math=f_{swap}:\{0, 1, 2\} \rightarrow \{2, 1, 0\}">. Using this option prior to using either of the five functions listed above results in the following transformations:
-
-* (regular, major) = <img src="https://render.githubusercontent.com/render/math?math=I \circ f_{swap}:\{0, 1, 2\} \rightarrow I:\{2, 1, 0\} \rightarrow \{2, 1, 0\}">.
-* (recessive, major) = <img src="https://render.githubusercontent.com/render/math?math=R \circ f_{swap}:\{0, 1, 2\} \rightarrow R:\{2, 1, 0\} \rightarrow \{2, 0, 0\}">.
-* (dominant, major) = <img src="https://render.githubusercontent.com/render/math?math=D \circ f_{swap}:\{0, 1, 2\} \rightarrow D:\{2, 1, 0\} \rightarrow \{2, 2, 0\}">. 
-* (heterozygous_only, major) = <img src="https://render.githubusercontent.com/render/math?math=He \circ f_{swap}:\{0, 1, 2\} \rightarrow He:\{2, 1, 0\} \rightarrow \{0, 2, 0\}">. 
-* (homozygous_only, major) = <img src="https://render.githubusercontent.com/render/math?math=Ho \circ f_{swap}:\{0, 1, 2\} \rightarrow Ho:\{2, 1, 0\} \rightarrow \{2, 0, 2\}">.
+<img src="https://github.com/EpistasisLab/REALGenomeSIM/blob/master/images/real_vs_sim_r_vs_distance_profile_comparison_GBR.png" width=1000/>
 
 ### Example 1: a simple additive model
 
