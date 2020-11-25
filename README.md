@@ -1,6 +1,6 @@
 ## ATTENTION :exclamation:
 
-You are now in the regens-analysis repository. [Click here](https://github.com/EpistasisLab/regens#input-turkey) if you want to go back to regens. 
+You are now in the regens-analysis repository. [Click here](https://github.com/EpistasisLab/regens) if you want to go back to regens. 
 
 ## Technical details :robot:
 
