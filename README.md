@@ -1,6 +1,10 @@
+## ATTENTION :exclamation:
+
+You are now in the regens-analysis repository. [Click here]((https://github.com/EpistasisLab/regens#input-turkey)) if you want to go back to regens. 
+
 ## Technical details :robot:
 
-Details regarding the reason to use one of the 1000 genome population's recombination maps for your genotype data [(input that we provided)](https://github.com/EpistasisLab/regens/blob/main/README.md#input-turkey) are in the thirs paragraph. 
+Details regarding the reason to use one of the 1000 genome population's recombination maps for your genotype data [(input that we provided)](https://github.com/EpistasisLab/regens#input-turkey) are in the thirs paragraph. 
 
 Regens repeats the following process for each chromosome. Each chromosome that REGENS simulates begins as a set of SNPs without genotypes, which is demarcated into segments by breakpoints. breakpoint positions are drawn from the distribution of recombination event positions, which is computed from the chromosome's recombination map for the selected population. Once an empty chromosome is segmented by breakpoints, the row indices of whole genome bed file rows from a real dataset are duplicated so that 1) there is one real individual for each empty segment and 2) every real individual is selected an equal number of times (minus 1 for each remainder sample if the number of segments is not divisible by the number of individuals). Then, for each empty segment, a whole chromosome is randomly selected without replacement from the set of autosomal genotypes that correspond to the duplicated indices, and the empty simulated segment is filled with the the homologous segment from the sampled real chromosome. These steps are repeated for every empty simulated segment in every chromosome so that all of the empty simulated genomes are filled with real SNP values. This quasirandom selection of individuals minimizes maf variation between the simulated and real datasets and also maintains normal population level genetic variability by randomizing segment selection. 
 
